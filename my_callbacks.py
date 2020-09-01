@@ -499,9 +499,5 @@ def update_result_chalets(n, bed, bath, hoa, pool, garage, built_year, waterfron
             data = df_modeloFinal.to_dict('rows')
             columns = [{"name": i, "id": i,} for i in (df_modeloFinal.columns)]
 
-
-       
-
-        
         return data,columns,f'The predicted price for this property is ${prediccion_precio[0]}'
 
