@@ -462,7 +462,7 @@ def update_result_chalets(n, bed, bath, hoa, pool, garage, built_year, waterfron
         
         #######
         # Obtenemos resultado binario del modelo
-        df_Binario.apply(pd.to_numeric)
+        
         resultado_modelo_binario_prediccion = data_load.model_chalets_XGBM_Binary_predict(df_Binario)
         resultado_modelo_binario = resultado_modelo_binario_prediccion[0]
         print("Resultado modelo binario: " + str(resultado_modelo_binario))
@@ -487,6 +487,7 @@ def update_result_chalets(n, bed, bath, hoa, pool, garage, built_year, waterfron
             df_modeloFinal = pd.DataFrame(listaModeloFinal2,columns=columnasModelo)
             prediccion_precio = data_load.model_chalets_XGBM_bigger_predict(df_modeloFinal)
 
+        df_modeloFinal['Predicted_Price'] = prediccion_precio[0]
         data,columns = None,None
         if path.exists('resources/models_results_data/chalets_results.csv'):
             current_df = pd.read_csv('resources/models_results_data/chalets_results.csv')
