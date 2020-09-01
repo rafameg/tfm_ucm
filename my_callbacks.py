@@ -3,7 +3,7 @@ from dash.dependencies import Input, Output, State
 import dash_html_components as html
 import dash_core_components as dcc
 import base64
-import dash_app
+from app import app
 import pandas as pd
 import numpy as np
 from resources import data_load
@@ -12,6 +12,8 @@ import os.path
 from os import path
 from dash.exceptions import PreventUpdate
 import plotly.graph_objects as go
+
+
 
 ####### Inicialización de variables importantes de dataframe 
 
@@ -25,7 +27,7 @@ def encode_image(image_file):
     encoded = base64.b64encode(open(image_file, 'rb').read())
     return 'data:image/png;base64,{}'.format(encoded.decode())
 
-@dash_app.app.callback(
+@app.callback(
     Output('tabs-content-master', 'children'),
     [Input('tabs-master', 'value')])
 
@@ -41,7 +43,7 @@ def render_content_main(tab):
     else:
         return introduction.tab_1_layout
 
-@dash_app.app.callback(
+@app.callback(
     Output('tabs-content-reporting', 'children'),
     [Input('tabs-reporting', 'value')])
 
@@ -51,7 +53,7 @@ def render_content_reporting(tab):
     elif tab == 'ReportingChalets':
         return reporting_chalets.tab_1_layout
 
-@dash_app.app.callback(
+@app.callback(
     Output('tabs-content-analysis', 'children'),
     [Input('tabs-analysis', 'value')])
 
@@ -61,7 +63,7 @@ def render_content_reporting(tab):
     elif tab == 'AnalisisChalets':
         return analysis_chalets.tab_1_layout
 
-@dash_app.app.callback(
+@app.callback(
     Output('display-image', 'src'),
     [Input('city', 'value'),
      Input('characteristics', 'value')])
@@ -69,7 +71,7 @@ def callback_image(city, characteristics):
     path = 'resources/images/'
     return encode_image(path+df_flats_images[(df_flats_images['city']==city) & (df_flats_images['characteristics']==characteristics)]['image'].values[0])
 
-@dash_app.app.callback(
+@app.callback(
     [Output("progress", "value"), Output("progress", "children")],
     [Input("progress-interval", "n_intervals")],
 )
@@ -82,7 +84,7 @@ def update_progress(n):
 
 ### Callback input prediction flats
 
-@dash_app.app.callback(
+@app.callback(
     [Output("tabla-analisis-flats", "data"), 
      Output('tabla-analisis-flats', 'columns'),
      Output('result-prediction-flats','children')],
@@ -188,7 +190,7 @@ def generarPrediccionFlatsYGrabarDatos(n,bed,bath,hbath,garage,one_space,living_
 
 ### Callbacks para la ventana de reporting de flats #######
 
-@dash_app.app.callback(
+@app.callback(
     Output('intermediate_filter_data_flats', 'data'),
     [Input('filter-city-flats', 'value'),
      Input('filter-price-flats','value')]
@@ -218,7 +220,7 @@ def save_filter_data(cities,prices):
 
 # Y el tercer paso es crear otro CALLBACK para hacer que la tabla lea
 # los datos almacenados en el STORE:
-@dash_app.app.callback(
+@app.callback(
     
     [Output('table-flats', 'data'),
      Output('map-flats','figure'),
@@ -290,7 +292,7 @@ def get_data_map(df_filter_graph):
 
 ### Callbacks para la ventana de reporting de Chalets #######
 
-@dash_app.app.callback(
+@app.callback(
     Output('intermediate_filter_data_chalets', 'data'),
     [Input('filter-city-chalets', 'value'),
      Input('filter-price-chalets','value')]
@@ -320,7 +322,7 @@ def save_filter_data(cities,prices):
 
 # Y el tercer paso es crear otro CALLBACK para hacer que la tabla lea
 # los datos almacenados en el STORE:
-@dash_app.app.callback(
+@app.callback(
     
     [Output('table-chalets', 'data'),
      Output('map-chalets','figure'),
@@ -390,7 +392,7 @@ def get_data_map(df_filter_graph):
 ### Validación Email Flats
 
 
-@dash_app.app.callback(
+@app.callback(
     [Output(component_id='output-userEmail-flats', component_property='children'),
      Output(component_id='output-userEmailStatus-flats', component_property='value')],
     [Input(component_id='input-userEmail-flats', component_property='value')]
@@ -406,7 +408,7 @@ def update_output_div(input_value):
 ### Validación Email Chalets
 
 
-@dash_app.app.callback(
+@app.callback(
     [Output(component_id='output-userEmail-chalets', component_property='children'),
      Output(component_id='output-userEmailStatus-chalets', component_property='value')],
     [Input(component_id='input-userEmail-chalets', component_property='value')]
@@ -420,7 +422,7 @@ def update_output_div(input_value):
 #####################################################################################
 
 ####### Callbacks Chalets Predictions ##########
-@dash_app.app.callback(
+@app.callback(
     [Output("tabla-analisis-chalets", "data"), 
      Output('tabla-analisis-chalets', 'columns'),
      Output('result-prediction-chalets','children')],
