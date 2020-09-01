@@ -172,7 +172,7 @@ def generarPrediccionFlatsYGrabarDatos(n,bed,bath,hbath,garage,one_space,living_
         df_final['Predicted_Price'] = prediccion_precio[0]
         data, columns = None, None
         if path.exists('resources/models_results_data/flats_results.csv'):
-            current_df = pd.read_csv('resources/output_data.csv')
+            current_df = pd.read_csv('resources/models_results_data/flats_results.csv')
             current_df = current_df.append(df_final,ignore_index=True)
             current_df.to_csv('resources/output_data.csv', index=False)
             data = current_df.to_dict('rows')
