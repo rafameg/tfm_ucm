@@ -6,7 +6,7 @@ from dash.dependencies import Input, Output
 from resources import data_load
 import dash_table
 
-df_input = data_load.data_load_input_data()
+df_input = data_load.data_load_flats_predictions()
 
 tab_1_layout = dbc.Container([
 								dbc.Row([
@@ -616,7 +616,10 @@ tab_1_layout = dbc.Container([
 										],style={'textAlign':'center'})
 									)
 								]),
-						        
+								html.Hr(),
+						        dbc.Row(
+						         dbc.Col(html.P(id='result-prediction-flats'), width={'size':6,'offset':1})
+						         ),
 						        html.Span(id="example-output", style={"vertical-align": "middle"}),
 						        html.Br(),
 						        html.Hr(),

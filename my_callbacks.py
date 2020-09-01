@@ -84,7 +84,8 @@ def update_progress(n):
 
 @dash_app.app.callback(
     [Output("tabla-analisis", "data"), 
-     Output('tabla-analisis', 'columns')],
+     Output('tabla-analisis', 'columns'),
+     Output('result-prediction-flats','children')],
     [Input("input-predi_button-flats", "n_clicks")],
     [
         State("input-bed-flats", "value"),
@@ -168,18 +169,19 @@ def generarPrediccionFlatsYGrabarDatos(n,bed,bath,hbath,garage,one_space,living_
 
         print("El precio que arroja el modelo es: " + str(prediccion_precio[0]))
         
+        df_final['Predicted_Price'] = prediccion_precio[0]
         data, columns = None, None
-        if path.exists('resources/output_data.csv'):
+        if path.exists('resources/models_results_data/flats_results.csv'):
             current_df = pd.read_csv('resources/output_data.csv')
             current_df = current_df.append(df_final,ignore_index=True)
             current_df.to_csv('resources/output_data.csv', index=False)
             data = current_df.to_dict('rows')
             columns = [{"name": i, "id": i,} for i in (current_df.columns)]
         else:
-            df_final.to_csv('resources/output_data.csv',index=False)
+            df_final.to_csv('resources/models_results_data/flats_results.csv',index=False)
             data = df_final.to_dict('rows')
             columns = [{"name": i, "id": i,} for i in (df_final.columns)]
-        return data,columns
+        return data,columns,f'The predicted price for this property is ${prediccion_precio[0]}'
 
 
 

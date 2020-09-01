@@ -6,7 +6,7 @@ from dash.dependencies import Input, Output
 from resources import data_load
 import dash_table
 
-df_input = data_load.data_load_input_data()
+df_input = data_load.data_load_flats_predictions()
 
 tab_1_layout = dbc.Container([
 								dbc.Row([

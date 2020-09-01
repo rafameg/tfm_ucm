@@ -5,23 +5,23 @@ import joblib
 
 
 def data_load_flats():
-	df = pd.read_csv('resources/flats_final_reporting_data.csv', sep = ';')
+	df = pd.read_csv('resources/reporting_datasets/flats_final_reporting_data.csv', sep = ';')
 	return df
 
 def data_load_chalets():
-	df = pd.read_csv('resources/chalets_final_reporting_data.csv', sep = ';')
+	df = pd.read_csv('resources/reporting_datasets/chalets_final_reporting_data.csv', sep = ';')
 	return df
 
 def data_load_images_chalets():
-	df = pd.read_csv('resources/chalets.csv', sep=',')
+	df = pd.read_csv('resources/image_gallery_datasets/gallery_data.csv', sep=',')
 	return df
 
-def data_load_input_data():
-	df = pd.read_csv('resources/output_data.csv',sep=',')
+def data_load_flats_predictions():
+	df = pd.read_csv('resources/models_results_data/flats_results.csv',sep=',')
 	return df
 
 def data_load_users_validated():
-	df = pd.read_csv('resources/users_validated_data.csv',sep=',')
+	df = pd.read_csv('resources/users_data/users_validated_data.csv',sep=',')
 	return df
 
 def model_flats_XGBM_Binary_predict(input_data):
