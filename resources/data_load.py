@@ -20,6 +20,10 @@ def data_load_flats_predictions():
 	df = pd.read_csv('resources/models_results_data/flats_results.csv',sep=',')
 	return df
 
+def data_load_chalets_predictions():
+	df = pd.read_csv('resources/models_results_data/chalets_results.csv',sep=',')
+	return df
+
 def data_load_users_validated():
 	df = pd.read_csv('resources/users_data/users_validated_data.csv',sep=',')
 	return df

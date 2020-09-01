@@ -625,7 +625,7 @@ tab_1_layout = dbc.Container([
 						        html.Hr(),
 						        html.P("Data automatically updated: "),
 						        dash_table.DataTable(
-												        id='tabla-analisis',
+												        id='tabla-analisis-flats',
 												        columns=[{'name':i, 'id':i} for i in df_input.columns],
 												        data=df_input.to_dict('records'),
 												        editable=True,                  # allow user to edit data inside tabel

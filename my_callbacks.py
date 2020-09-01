@@ -83,8 +83,8 @@ def update_progress(n):
 ### Callback input prediction flats
 
 @dash_app.app.callback(
-    [Output("tabla-analisis", "data"), 
-     Output('tabla-analisis', 'columns'),
+    [Output("tabla-analisis-flats", "data"), 
+     Output('tabla-analisis-flats', 'columns'),
      Output('result-prediction-flats','children')],
     [Input("input-predi_button-flats", "n_clicks")],
     [
@@ -181,6 +181,7 @@ def generarPrediccionFlatsYGrabarDatos(n,bed,bath,hbath,garage,one_space,living_
             df_final.to_csv('resources/models_results_data/flats_results.csv',index=False)
             data = df_final.to_dict('rows')
             columns = [{"name": i, "id": i,} for i in (df_final.columns)]
+
         return data,columns,f'The predicted price for this property is ${prediccion_precio[0]}'
 
 
@@ -419,9 +420,10 @@ def update_output_div(input_value):
 #####################################################################################
 
 ####### Callbacks Chalets Predictions ##########
-
 @dash_app.app.callback(
-    Output('result-prediction-chalets', 'children'),
+    [Output("tabla-analisis-chalets", "data"), 
+     Output('tabla-analisis-chalets', 'columns'),
+     Output('result-prediction-chalets','children')],
     [Input('input-predi_button-chalets', 'n_clicks')],
     [State('input-bed-chalets', 'value'), 
       State('input-bath-chalets', 'value'), 
@@ -434,8 +436,10 @@ def update_output_div(input_value):
       State('input-zip-code-chalets', 'value'),
       State('input-dom-chalets', 'value')]
 )
-def update_result(n_clicks, bed, bath, hoa, pool, garage, built_year, waterfront, living_area, zip_code, dom):
-    if int(n_clicks) > 0:
+def update_result_chalets(n, bed, bath, hoa, pool, garage, built_year, waterfront, living_area, zip_code, dom):
+    if n is None:
+        raise PreventUpdate
+    else :
         print("Input Bed: " + str(bed))
         print("Input bath: " + str(bath))
         print("Input hoa: " + str(hoa))
@@ -458,12 +462,13 @@ def update_result(n_clicks, bed, bath, hoa, pool, garage, built_year, waterfront
         
         #######
         # Obtenemos resultado binario del modelo
-
+        df_Binario.apply(pd.to_numeric)
         resultado_modelo_binario_prediccion = data_load.model_chalets_XGBM_Binary_predict(df_Binario)
         resultado_modelo_binario = resultado_modelo_binario_prediccion[0]
         print("Resultado modelo binario: " + str(resultado_modelo_binario))
 
-        prediccion_precio = 0
+        prediccion_precio = None
+        df_modeloFinal = None
 
         if resultado_modelo_binario == 0:
             columnasModelo = ['est_sqft_liv_area','est_valor_zipcode', 'est_num_beds', 'est_num_baths','est_year_built','pool_yn.Yes','est_garage_spaces']
@@ -482,11 +487,21 @@ def update_result(n_clicks, bed, bath, hoa, pool, garage, built_year, waterfront
             df_modeloFinal = pd.DataFrame(listaModeloFinal2,columns=columnasModelo)
             prediccion_precio = data_load.model_chalets_XGBM_bigger_predict(df_modeloFinal)
 
+        data,columns = None,None
+        if path.exists('resources/models_results_data/chalets_results.csv'):
+            current_df = pd.read_csv('resources/models_results_data/chalets_results.csv')
+            current_df = current_df.append(df_modeloFinal,ignore_index=True)
+            current_df.to_csv('resources/models_results_data/chalets_results.csv', index=False)
+            data = current_df.to_dict('rows')
+            columns = [{"name": i, "id": i,} for i in (current_df.columns)]
+        else:
+            df_modeloFinal.to_csv('resources/models_results_data/chalets_results.csv',index=False)
+            data = df_modeloFinal.to_dict('rows')
+            columns = [{"name": i, "id": i,} for i in (df_modeloFinal.columns)]
 
 
-
-        # Obtenemos resultado binario del modelo
+       
 
         
-        return (f'The predicted price for this property is ${prediccion_precio[0]}')
+        return data,columns,f'The predicted price for this property is ${prediccion_precio[0]}'
 

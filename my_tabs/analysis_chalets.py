@@ -6,7 +6,7 @@ from dash.dependencies import Input, Output
 from resources import data_load
 import dash_table
 
-df_input = data_load.data_load_flats_predictions()
+df_input = data_load.data_load_chalets_predictions()
 
 tab_1_layout = dbc.Container([
 								dbc.Row([
@@ -477,7 +477,7 @@ tab_1_layout = dbc.Container([
 						    dbc.Row([
 						        dbc.Col([
 						        	html.Div([
-							        	dbc.Button('Generate Prediction', id='input-predi_button-chalets', n_clicks=0, color='primary', className="mr-2"),
+							        	dbc.Button('Generate Prediction', id='input-predi_button-chalets',color='primary', className="mr-2"),
 							        ],style={'textAlign':'center'}),
 							        html.Span(id="input-prediction-chalets", style={"vertical-align": "middle"})
 						    ],
@@ -486,11 +486,30 @@ tab_1_layout = dbc.Container([
 						        ], no_gutters=True
 						        ),
 						    html.Br(),
-						    html.Br(),
+						    html.Hr(),
 						    dbc.Row(
 						         dbc.Col(html.P(id='result-prediction-chalets'), width={'size':6,'offset':1})
-						         ),
-						        
+						    ),
+						    html.Hr(),
+					        html.P("Data automatically updated: "),
+					        dash_table.DataTable(
+											        id='tabla-analisis-chalets',
+											        columns=[{'name':i, 'id':i} for i in df_input.columns],
+											        data=df_input.to_dict('records'),
+											        editable=True,                  # allow user to edit data inside tabel
+											        row_deletable=True,             # allow user to delete rows
+											        sort_action="native",           # give user capability to sort columns
+											        sort_mode="single",             # sort across 'multi' or 'single' columns
+											        filter_action="native",         # allow filtering of columns
+											        page_action='none',             # render all of the data at once. No paging.
+											        style_table={'height': '300px', 'overflowY': 'auto'},
+											        #style_cell={'textAlign': 'left', 'minWidth': '100px', 'width': '100px', 'maxWidth': '100px'},
+											        style_cell={'padding': '5px'},
+												    style_header={
+												        'backgroundColor': 'white',
+												        'fontWeight': 'bold'
+												    }
+											    )    
 							])
 
 
