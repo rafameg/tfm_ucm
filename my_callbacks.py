@@ -1,18 +1,14 @@
-import dash
-from dash.dependencies import Input, Output, State
-import dash_html_components as html
-import dash_core_components as dcc
 import base64
-from app import app
 import pandas as pd
 import numpy as np
+from dash.dependencies import Input, Output, State
 from resources import data_load
 from my_tabs import introduction,main_reporting, reporting_flats, reporting_chalets, gallery, main_analysis, analysis_flats, analysis_chalets
 import os.path
 from os import path
 from dash.exceptions import PreventUpdate
 import plotly.graph_objects as go
-
+from app import app
 
 
 ####### Inicialización de variables importantes de dataframe 
