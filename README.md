@@ -14,4 +14,5 @@ pip install -r requirements.txt
 
 ```python
 python main.py
+Then go to the browser and type 0.0.0.0:8080 into the address bar.
 ```
