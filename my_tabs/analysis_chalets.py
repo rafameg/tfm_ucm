@@ -487,10 +487,20 @@ tab_1_layout = dbc.Container([
 									)
 								]),
 						    html.Br(),
-						    dbc.Row(
-						         dbc.Col(html.P(id='result-prediction-chalets'), width={'size':6,'offset':1})
+						    dcc.Loading(
+						    	html.Div([
+							    	dbc.Row([
+							    		dbc.Col(
+							        	 	html.P(id='result-prediction-chalets')
+							        	)
+							        ]),
+							        dbc.Row([
+							        	dbc.Col(
+							        		html.Div(id='output-data-recomenacion')
+							        	)
+							        ])
+							    ])
 						    ),
-						    html.Div(id='output-data-recomenacion'),
 						    html.Hr(),
 					        html.P("Data automatically updated: "),
 					        dash_table.DataTable(
