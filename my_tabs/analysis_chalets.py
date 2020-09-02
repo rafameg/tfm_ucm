@@ -8,6 +8,7 @@ import dash_table
 
 df_input = data_load.data_load_chalets_predictions()
 
+
 tab_1_layout = dbc.Container([
 								dbc.Row([
 									html.P("Validate user for premium features: "),
@@ -479,17 +480,16 @@ tab_1_layout = dbc.Container([
 						        	html.Div([
 							        	dbc.Button('Generate Prediction', id='input-predi_button-chalets',color='primary', className="mr-2"),
 							        ],style={'textAlign':'center'}),
-							        html.Span(id="input-prediction-chalets", style={"vertical-align": "middle"})
-						    ],
-						    width={'size':6,'offset':1}
+						    	],width={'size':6,'offset':1}
+						    	)
+						    ], no_gutters=True
 						    ),
-						        ], no_gutters=True
-						        ),
 						    html.Br(),
 						    html.Hr(),
 						    dbc.Row(
 						         dbc.Col(html.P(id='result-prediction-chalets'), width={'size':6,'offset':1})
 						    ),
+						    html.Div(id='output-data-recomenacion'),
 						    html.Hr(),
 					        html.P("Data automatically updated: "),
 					        dash_table.DataTable(
@@ -509,7 +509,9 @@ tab_1_layout = dbc.Container([
 												        'backgroundColor': 'white',
 												        'fontWeight': 'bold'
 												    }
-											    )    
-							])
+											    )
+
+							
+					])
 
 

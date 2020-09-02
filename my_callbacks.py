@@ -9,6 +9,9 @@ from os import path
 from dash.exceptions import PreventUpdate
 import plotly.graph_objects as go
 from app import app
+import dash_html_components as html
+import dash_table
+import dash_bootstrap_components as dbc
 
 
 ####### Inicialización de variables importantes de dataframe 
@@ -421,7 +424,8 @@ def update_output_div(input_value):
 @app.callback(
     [Output("tabla-analisis-chalets", "data"), 
      Output('tabla-analisis-chalets', 'columns'),
-     Output('result-prediction-chalets','children')],
+     Output('result-prediction-chalets','children'),
+     Output('output-data-recomenacion','children')],
     [Input('input-predi_button-chalets', 'n_clicks')],
     [State('input-bed-chalets', 'value'), 
       State('input-bath-chalets', 'value'), 
@@ -498,5 +502,33 @@ def update_result_chalets(n, bed, bath, hoa, pool, garage, built_year, waterfron
             data = df_modeloFinal.to_dict('rows')
             columns = [{"name": i, "id": i,} for i in (df_modeloFinal.columns)]
 
-        return data,columns,f'The predicted price for this property is ${prediccion_precio[0]}'
+
+        recomendacion = data_load.recomendador_obtener_recomendacion(bed,bath,garage,hoa,pool,waterfront,living_area,built_year,zip_code,dom,prediccion_precio[0])
+        print(recomendacion)
+        if recomendacion.empty == False:
+            figura = html.Div([
+                            html.Hr(),
+                            dbc.Row([html.P("Se han encontrado datos de inmuebles similares a los que estás interesado en vender. ")]),
+                            dbc.Row([
+                                dbc.Col( 
+                                    dash_table.DataTable(
+                                                        data = recomendacion.to_dict('records'),
+                                                        columns=[{'name': i, 'id': i} for i in recomendacion.columns]
+                                                        )
+                                )
+                            ])
+
+                        ])
+        else:
+            figura = html.Div([
+                                html.Hr(),
+                                html.P("No se ha encontrado ninguna recomendación. ")
+                            ])
+
+        #dataRecomendador = recomendacion.to_dict('rows')
+        #columnsRecomendador = [{"name": i, "id": i,} for i in (dataRecomendador.columns)]
+
+
+
+        return data,columns,f'The predicted price for this property is ${prediccion_precio[0]}', figura
 

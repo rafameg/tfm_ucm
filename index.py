@@ -4,9 +4,6 @@ import dash_core_components as dcc
 import my_callbacks
 from app import server
 
-
-#app = dash.Dash()
-
 app.layout = html.Div([
 							    html.H1('Real Estate Prediction Platform'),
 							    dcc.Tabs(id="tabs-master", value='Description', 

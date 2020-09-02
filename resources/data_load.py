@@ -1,8 +1,12 @@
 import pandas as pd
 import xgboost as xgb
 import joblib
+from resources import recomendador
 
 
+def data_load_flats_recomendador():
+	df = pd.read_excel('resources/recomendador_data/chaletsRecomen.xlsx')
+	return df
 
 def data_load_flats():
 	df = pd.read_csv('resources/reporting_datasets/flats_final_reporting_data.csv', sep = ';')
@@ -51,3 +55,11 @@ def model_chalets_XGBM_bigger_predict(input_data):
 def model_chalets_XGBM_lower_predict(input_data):
 	model = joblib.load('resources/models/model_XGBM_Chalets_Lower.model')
 	return model.predict(input_data)
+
+def recomendador_obtener_recomendacion(bed, fbath, garage, hoa, pool, waterfront,living_area, built_year, zip_code, dom, predicted_price):
+	datosRecomendador = data_load_flats_recomendador()
+	recomendaciones = recomendador.recom_correlation_st_lim(bed, fbath, garage, hoa, pool, waterfront,living_area, built_year, zip_code, dom,predicted_price,datosRecomendador)
+	return recomendaciones
+
+
+
