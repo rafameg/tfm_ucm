@@ -22,9 +22,24 @@ df_flats_images = data_load.data_load_images_chalets()
 
 #############################################################
 
+###### Inicializar variables path ficheros resultados prediccion
+
+path_chalets = 'resources/models_results_data/chalets_results.csv'
+path_flats = 'resources/models_results_data/flats_results.csv'
+
+
+#############################################################
+
+
+### Función auxiliar para cargar imágenes dentro del Dash.
+
 def encode_image(image_file):
     encoded = base64.b64encode(open(image_file, 'rb').read())
     return 'data:image/png;base64,{}'.format(encoded.decode())
+
+
+#### Callback que tiene como entrada el selector de pestañas principal de la web. Retorna la pestaña según la selección
+
 
 @app.callback(
     Output('tabs-content-master', 'children'),
@@ -42,6 +57,11 @@ def render_content_main(tab):
     else:
         return introduction.tab_1_layout
 
+##########################################################################################################################
+
+
+#### Callback que tiene como entrada el selector de pestañas de la ventana de reporting. Retorna la pestaña según la selección
+
 @app.callback(
     Output('tabs-content-reporting', 'children'),
     [Input('tabs-reporting', 'value')])
@@ -52,23 +72,39 @@ def render_content_reporting(tab):
     elif tab == 'ReportingChalets':
         return reporting_chalets.tab_1_layout
 
+
+##########################################################################################################################
+
+
+#### Callback que tiene como entrada el selector de pestañas de la ventana de análisis. Retorna la pestaña según la selección
+
 @app.callback(
     Output('tabs-content-analysis', 'children'),
     [Input('tabs-analysis', 'value')])
 
-def render_content_reporting(tab):
+def render_content_analysis(tab):
     if tab == 'AnalisisPisos':
         return analysis_flats.tab_1_layout
     elif tab == 'AnalisisChalets':
         return analysis_chalets.tab_1_layout
 
+##########################################################################################################################
+
+
+### Callback que carga la imagen seleccionada dentro de la ventana de galería
+
 @app.callback(
     Output('display-image', 'src'),
     [Input('city', 'value'),
      Input('characteristics', 'value')])
-def callback_image(city, characteristics):
+
+def load_image(city, characteristics):
     path = 'resources/images/'
     return encode_image(path+df_flats_images[(df_flats_images['city']==city) & (df_flats_images['characteristics']==characteristics)]['image'].values[0])
+
+##########################################################################################################################
+
+### Callback en des-uso. Se deja por si se puede llegar a reutilizar
 
 @app.callback(
     [Output("progress", "value"), Output("progress", "children")],
@@ -81,7 +117,10 @@ def update_progress(n):
     # only add text after 5% progress to ensure text isn't squashed too much
     return progress, f"{progress} %" if progress >= 5 else ""
 
-### Callback input prediction flats
+##########################################################################################################################
+
+### Callback input prediction flats: Tiene como entrada los inputs de las variables y retorna el resultado por pantalla. También 
+### devuelve los campos necesarios (data y columns) para que se actualicen los datos en la tabla en tiempo real.
 
 @app.callback(
     [Output("tabla-analisis-flats", "data"), 
@@ -115,7 +154,8 @@ def update_progress(n):
         State("input-ready_to_lease-flats", "value")
     ],
 )
-def generarPrediccionFlatsYGrabarDatos(n,bed,bath,hbath,garage,one_space,living_area,tile,carpeted,ceramic,wood,waterfront,two_more_spaces,ocean_view,housing_older,intercoastal,pets,style,year_built,us_one,corner_unit,zip_code,nloyo,association_fee,ready_to_lease):
+
+def generatePredictionsFlats(n,bed,bath,hbath,garage,one_space,living_area,tile,carpeted,ceramic,wood,waterfront,two_more_spaces,ocean_view,housing_older,intercoastal,pets,style,year_built,us_one,corner_unit,zip_code,nloyo,association_fee,ready_to_lease):
     if n is None:
         raise PreventUpdate
     else:
@@ -172,20 +212,20 @@ def generarPrediccionFlatsYGrabarDatos(n,bed,bath,hbath,garage,one_space,living_
         
         df_final['Predicted_Price'] = prediccion_precio[0]
         data, columns = None, None
-        if path.exists('resources/models_results_data/flats_results.csv'):
-            current_df = pd.read_csv('resources/models_results_data/flats_results.csv')
+        if path.exists(path_flats):
+            current_df = pd.read_csv(path_flats)
             current_df = current_df.append(df_final,ignore_index=True)
-            current_df.to_csv('resources/models_results_data/flats_results.csv', index=False)
+            current_df.to_csv(path_flats, index=False)
             data = current_df.to_dict('rows')
             columns = [{"name": i, "id": i,} for i in (current_df.columns)]
         else:
-            df_final.to_csv('resources/models_results_data/flats_results.csv',index=False)
+            df_final.to_csv(path_flats,index=False)
             data = df_final.to_dict('rows')
             columns = [{"name": i, "id": i,} for i in (df_final.columns)]
 
         return data,columns,f'The predicted price for this property is ${prediccion_precio[0]}'
 
-
+##########################################################################################################################
 
 ### Callbacks para la ventana de reporting de flats #######
 
@@ -438,7 +478,7 @@ def update_output_div(input_value):
       State('input-zip-code-chalets', 'value'),
       State('input-dom-chalets', 'value')]
 )
-def update_result_chalets(n, bed, bath, hoa, pool, garage, built_year, waterfront, living_area, zip_code, dom):
+def generatePredictionsChalets(n, bed, bath, hoa, pool, garage, built_year, waterfront, living_area, zip_code, dom):
     if n is None:
         raise PreventUpdate
     else :
@@ -489,21 +529,22 @@ def update_result_chalets(n, bed, bath, hoa, pool, garage, built_year, waterfron
             df_modeloFinal = pd.DataFrame(listaModeloFinal2,columns=columnasModelo)
             prediccion_precio = data_load.model_chalets_XGBM_bigger_predict(df_modeloFinal)
 
+
         df_modeloFinal['Predicted_Price'] = prediccion_precio[0]
         data,columns = None,None
-        if path.exists('resources/models_results_data/chalets_results.csv'):
-            current_df = pd.read_csv('resources/models_results_data/chalets_results.csv')
+        if path.exists(path_chalets): ## variable path_chalets declarado al principio de este fichero
+            current_df = pd.read_csv(path_chalets)
             current_df = current_df.append(df_modeloFinal,ignore_index=True)
-            current_df.to_csv('resources/models_results_data/chalets_results.csv', index=False)
+            current_df.to_csv(path_chalets, index=False)
             data = current_df.to_dict('rows')
             columns = [{"name": i, "id": i,} for i in (current_df.columns)]
         else:
-            df_modeloFinal.to_csv('resources/models_results_data/chalets_results.csv',index=False)
+            df_modeloFinal.to_csv(path_chalets,index=False)
             data = df_modeloFinal.to_dict('rows')
             columns = [{"name": i, "id": i,} for i in (df_modeloFinal.columns)]
 
 
-        recomendacion = data_load.recomendador_obtener_recomendacion(bed,bath,garage,hoa,pool,waterfront,living_area,built_year,zip_code,dom,prediccion_precio[0])
+        recomendacion = data_load.recommender_get_recomendation(bed,bath,garage,hoa,pool,waterfront,living_area,built_year,zip_code,dom,prediccion_precio[0])
         print(recomendacion)
         if recomendacion.empty == False:
             figura = html.Div([
@@ -524,11 +565,6 @@ def update_result_chalets(n, bed, bath, hoa, pool, garage, built_year, waterfron
                                 html.Hr(),
                                 html.P("No se ha encontrado ninguna recomendación. ")
                             ])
-
-        #dataRecomendador = recomendacion.to_dict('rows')
-        #columnsRecomendador = [{"name": i, "id": i,} for i in (dataRecomendador.columns)]
-
-
 
         return data,columns,f'The predicted price for this property is ${prediccion_precio[0]}', figura
 

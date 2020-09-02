@@ -612,7 +612,7 @@ tab_1_layout = dbc.Container([
 								dbc.Row([
 									dbc.Col(
 										html.Div([
-											dbc.Button("Generate Prediction", id="input-predi_button-flats", className="mr-2")
+											dbc.Button("Generate Prediction", id="input-predi_button-flats", color='primary',className="mr-2")
 										],style={'textAlign':'center'})
 									)
 								]),

@@ -11,16 +11,22 @@ df_input = data_load.data_load_chalets_predictions()
 
 tab_1_layout = dbc.Container([
 								dbc.Row([
-									html.P("Validate user for premium features: "),
-									html.Div(
-									    children=[dcc.Input(id='input-userEmail-chalets')],  # fill out your Input however you need
-									    style=dict(display='flex', justifyContent='center')
+									dbc.Col(
+										html.P("Validate user for premium features: ")
 									),
-									html.Div(id='output-userEmail-chalets'),
+									dbc.Col(
+										html.Div(
+										    children=[dcc.Input(id='input-userEmail-chalets')],  # fill out your Input however you need
+										    style=dict(display='flex', justifyContent='center')
+										)
+									),
+									dbc.Col(
+										html.Div(id='output-userEmail-chalets')
+									),
 									dcc.Store(id = 'output-userEmailStatus-chalets', storage_type = 'memory')
 									
 								]),
-								html.Br(),
+								html.Hr(),
 							    dbc.Row([
 						        dbc.Col(html.P('Bedrooms'),
 						                    width={'size': 1, 'offset':1},
@@ -473,19 +479,14 @@ tab_1_layout = dbc.Container([
 						        
 						    ], no_gutters=False
 						        ),
-						    html.Br(),
-						    html.Br(),
 						    dbc.Row([
-						        dbc.Col([
-						        	html.Div([
-							        	dbc.Button('Generate Prediction', id='input-predi_button-chalets',color='primary', className="mr-2"),
-							        ],style={'textAlign':'center'}),
-						    	],width={'size':6,'offset':1}
-						    	)
-						    ], no_gutters=True
-						    ),
+									dbc.Col(
+										html.Div([
+											dbc.Button("Generate Prediction", id="input-predi_button-chalets", color='primary',className="mr-2")
+										],style={'textAlign':'center'})
+									)
+								]),
 						    html.Br(),
-						    html.Hr(),
 						    dbc.Row(
 						         dbc.Col(html.P(id='result-prediction-chalets'), width={'size':6,'offset':1})
 						    ),
