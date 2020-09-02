@@ -6,7 +6,7 @@ from app import server
 
 app.layout = html.Div([
 							    html.H1('Real Estate Prediction Platform'),
-							    dcc.Tabs(id="tabs-master", value='Description', 
+							    dcc.Tabs(id="tabs-master", value='Introduction', 
 							    	children=[
 								        dcc.Tab(label='Introduction', value='Introduction'),
 								        dcc.Tab(label='Gallery', value='gallery'),
