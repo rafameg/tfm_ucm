@@ -8,7 +8,7 @@ import dash_table
 
 df_input = data_load.data_load_flats_predictions()
 
-tab_1_layout = dbc.Container([
+tab_1_layout = html.Div([
 								dbc.Row([
 									dbc.Col(
 										html.P("Validate user for premium features: ")
