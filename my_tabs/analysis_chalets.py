@@ -496,7 +496,7 @@ tab_1_layout = dbc.Container([
 							        ]),
 							        dbc.Row([
 							        	dbc.Col(
-							        		html.Div(id='output-data-recomenacion')
+							        		html.Div(id='output-data-recomenacion-chalets')
 							        	)
 							        ])
 							    ])

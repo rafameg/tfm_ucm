@@ -125,7 +125,8 @@ def update_progress(n):
 @app.callback(
     [Output("tabla-analisis-flats", "data"), 
      Output('tabla-analisis-flats', 'columns'),
-     Output('result-prediction-flats','children')],
+     Output('result-prediction-flats','children'),
+     Output('output-data-recomenacion-flats','children')],
     [Input("input-predi_button-flats", "n_clicks")],
     [
         State("input-bed-flats", "value"),
@@ -223,7 +224,29 @@ def generatePredictionsFlats(n,bed,bath,hbath,garage,one_space,living_area,tile,
             data = df_final.to_dict('rows')
             columns = [{"name": i, "id": i,} for i in (df_final.columns)]
 
-        return data,columns,f'The predicted price for this property is ${prediccion_precio[0]}'
+        ### El primer parámetro de la llamada es False porque True significa chalets y False significa Flats
+        recomendacion = data_load.recommender_get_recomendation(False,bed,bath,garage,zip_code,living_area,year_built,prediccion_precio[0])
+        if recomendacion.empty == False:
+            figura = html.Div([
+                            html.Hr(),
+                            dbc.Row([html.P("Se han encontrado datos de inmuebles similares a los que estás interesado en vender. ")]),
+                            dbc.Row([
+                                dbc.Col( 
+                                    dash_table.DataTable(
+                                                        data = recomendacion.to_dict('records'),
+                                                        columns=[{'name': i, 'id': i} for i in recomendacion.columns]
+                                                        )
+                                )
+                            ])
+
+                        ])
+        else:
+            figura = html.Div([
+                                html.Hr(),
+                                html.P("No se ha encontrado ninguna recomendación. ")
+                            ])
+
+        return data,columns,f'The predicted price for this property is ${prediccion_precio[0]}',figura
 
 ##########################################################################################################################
 
@@ -465,7 +488,7 @@ def update_output_div(input_value):
     [Output("tabla-analisis-chalets", "data"), 
      Output('tabla-analisis-chalets', 'columns'),
      Output('result-prediction-chalets','children'),
-     Output('output-data-recomenacion','children')],
+     Output('output-data-recomenacion-chalets','children')],
     [Input('input-predi_button-chalets', 'n_clicks')],
     [State('input-bed-chalets', 'value'), 
       State('input-bath-chalets', 'value'), 
@@ -544,8 +567,13 @@ def generatePredictionsChalets(n, bed, bath, hoa, pool, garage, built_year, wate
             columns = [{"name": i, "id": i,} for i in (df_modeloFinal.columns)]
 
 
-        recomendacion = data_load.recommender_get_recomendation(bed,bath,garage,hoa,pool,waterfront,living_area,built_year,zip_code,dom,prediccion_precio[0])
-        print(recomendacion)
+        ### Llamamos al codigo para calcular el intervalo una vez obtenido el precio
+        coeficiente_intervalo_Array = data_load.model_chalets_RLogistic_interval(int(prediccion_precio[0]))
+        coeficiente_intervalo = float(coeficiente_intervalo_Array[0]) # devuelve un array con un solo valor, nos quedamos con ese
+        print("Interval coefficient: " + str(coeficiente_intervalo))
+        limiteInferiorIntervalo = int(prediccion_precio[0]) - (int(prediccion_precio[0]) * coeficiente_intervalo)
+        limiteSuperiorIntervalo = int(prediccion_precio[0]) + (int(prediccion_precio[0]) * coeficiente_intervalo)
+        recomendacion = data_load.recommender_get_recomendation(True,bed,bath,garage,zip_code,living_area,built_year,prediccion_precio[0])
         if recomendacion.empty == False:
             figura = html.Div([
                             html.Hr(),
@@ -566,5 +594,5 @@ def generatePredictionsChalets(n, bed, bath, hoa, pool, garage, built_year, wate
                                 html.P("No se ha encontrado ninguna recomendación. ")
                             ])
 
-        return data,columns,f'The predicted price for this property is ${prediccion_precio[0]}', figura
+        return data,columns,f'The predicted price for this property is in the interval (inf,sup) between ${limiteInferiorIntervalo} and ${limiteSuperiorIntervalo}', figura
 

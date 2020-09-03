@@ -617,9 +617,20 @@ tab_1_layout = dbc.Container([
 									)
 								]),
 								html.Hr(),
-						        dbc.Row(
-						         dbc.Col(html.P(id='result-prediction-flats'), width={'size':6,'offset':1})
-						         ),
+						        dcc.Loading(
+							    	html.Div([
+								    	dbc.Row([
+								    		dbc.Col(
+								        	 	html.P(id='result-prediction-flats')
+								        	)
+								        ]),
+								        dbc.Row([
+								        	dbc.Col(
+								        		html.Div(id='output-data-recomenacion-flats')
+								        	)
+								        ])
+								    ])
+							    ),
 						        html.Span(id="example-output", style={"vertical-align": "middle"}),
 						        html.Br(),
 						        html.Hr(),

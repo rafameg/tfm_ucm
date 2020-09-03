@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import scipy.spatial.distance as pi
 
-def recom_correlation_st_lim (bed, fbath, garage, hoa, pool, waterfront,living_area, built_year, zip_code, dom,predicted_price,datosRecomendador):
+def recom_correlation_st_lim (bed,fbath,garage,zip_code,living_area,built_year,predicted_price,datosRecomendador):
     # parámetros sobre los que se calcula la semejanza de items
     col=['Beds','FBaths','Garage_Spaces','Zip_Code',
           'SqFt_Liv_Area','Year_Built','Sale_Price']
