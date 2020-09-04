@@ -45,27 +45,27 @@ Dash_App/
 	|-- README.MD
 
 
-### main.py 
+#### main.py 
 
 Contains the main programar that starts the execution of the project.
 
-### app.py
+####  app.py
 
 Initialize the app and the server properties
 
-### my_callbacks.py
+####  my_callbacks.py
 
 Manage all the interactions between the data and the html views contained on the web
 
-### Tabs/... .py
+####  Tabs/... .py
 
 Contains all the html views and programmatic to displays and capture the data and the behaviour from the user.
 
-### Resources
+####  Resources
 
 Contains all the extra files needed for the running of the application.
 Most important file is:
 
-##### data_load.py
+####  data_load.py
 
 Contains all the calls to the several Machine Learning algorithmns implemented, XGBM models, recommendation model, data_loads, etc.
