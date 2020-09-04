@@ -5,7 +5,7 @@ import my_callbacks
 from app import server
 
 app.layout = html.Div([
-							    html.H1('Real Estate Prediction Platform'),
+							    html.H1('ProSelling - Real Estate Prediction Platform'),
 							    dcc.Tabs(id="tabs-master", value='Introduction', 
 							    	children=[
 								        dcc.Tab(label='Introduction', value='Introduction'),

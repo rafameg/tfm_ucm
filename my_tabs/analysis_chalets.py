@@ -27,6 +27,43 @@ tab_1_layout = html.Div([
 									
 								]),
 								html.Hr(),
+								dbc.Row([
+									dbc.Col(
+										html.Img(
+					                        id='button-help-chalets',
+					                        src="assets/question-circle-solid.svg",
+					                        n_clicks=0,
+					                        className='info-icon',
+					                        style={'width' : 25, 'height' : 25},
+					                    ),
+				                    )
+								]),
+								##### Explicacion de las variables dentro del Rmarkdown.
+								dbc.Modal(
+						            [
+						                dbc.ModalHeader("Variable explanations"),
+						                dbc.ModalBody(dcc.Markdown("""
+								            The _**Signal Range**_ panel displays a histogram of the signal range of
+								            each tower in the dataset.  The dark gray bars represent the set of towers
+								            in the current selection, while the light gray bars underneath represent
+								            all towers in the dataset.
+								            
+								            Left-click drag to select histogram bars using the box-selection tool.
+								            
+								            The _**Clear Selection**_ button may be used to clear any selections
+								            applied in the _**Signal Range**_ panel, while leaving any selections
+								            applied in other panels unchanged.
+								        """)),
+						                dbc.ModalFooter(
+						                    dbc.Button(
+						                        "Thanks", id="close-modal-chalets", className="ml-auto"
+						                    ),style={'textAlign': 'center'}
+						                ),
+						            ],
+						            id="modal-chalets",
+						            centered=True,
+						            size='xl'
+						        ),
 							    dbc.Row([
 						        dbc.Col(html.P('Bedrooms'),
 						                    width={'size': 1, 'offset':1},

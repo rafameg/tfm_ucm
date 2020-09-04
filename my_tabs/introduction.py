@@ -28,11 +28,19 @@ tab_1_layout = html.Div([
 			    	
 			    	
 					dbc.Container([
+						html.Br(),
 						dbc.Row([
+								html.Br(),
 								html.Br(),
 								html.H2('Welcome'),
 								html.Div([
-										html.P('The current website consists of the final project of the Big Data and Business Analytics master''s degree at the UCM, in which a web tool is developed for the prediction of real state housing prices for the state of Florida, United States. The work has been carried out by a multidisciplinary team of six people, who have jointly carried out the different parts of it.')
+										html.P(dcc.Markdown("""
+
+												The following web application has been developed to predict residential real estate property values for the South Florida region of the U.S. By means of advanced machine learning techniques, it is now possible to calculate the market price of a condo or a single-family home with a level of precision never before seen in the industry. The goal was to improve upon similar tools currently available to realtors and homeowners and concentrate exclusively on properties located in the Miami-Dade, Broward and Palm Beach counties. In fact, the primary focus lies on forecasting values for properties between the $150,000 and the $3.5-million range. The results obtained from the appplication’s initial launch evaluation process have surpassed all expectations, indicating that the *ProSelling* solution is considerably more accurate than any of its counterparts.
+												\n
+												This project has been led by a team of six graduate students pursuing a Master’s degree in Big Data and Business Analytics from the University Complutense Madrid, and has covered areas involving machine learning, feature engineering, business intelligence and web application development. The machine learning models were initially created and tested using R, while the web application was developed using Python and Plotly’s Dash library.
+
+												"""))
 									]),
 
 								#html.Iframe(src = 'https://player.vimeo.com/video/254172349'),
@@ -40,35 +48,58 @@ tab_1_layout = html.Div([
 								# html.Div([
 								#         dbc.Progress("50%", value=50,  style={"height": "30px", "width":"1000px"})
 								# ])
-							]),
-						html.Div([
-						html.Hr(),
-						dbc.Row([
-								html.H2('Project Structure'),
-								html.Br(),
-								html.Hr()
-								
-							]),
 						]),
+						dbc.Row([
+							dcc.Markdown("""
+								## Project Structure \n
 
-						dbc.Row([
-							html.P("The different parts of which the project is made up are the following:")
-							]),
-						dbc.Row([
-								html.Div([
-										dbc.Button('Data Extraction',id = 'collapse-button-data-extraction',className = 'mb-3',color = 'secondary'),
-			                       			dbc.Collapse(dbc.Card(dbc.CardBody('Process that involves retrieval of data from various sources, in our case, we extract the data from real state agency')),id = 'collapse-data-extraction', is_open=True),
-			                       		dbc.Button('Data Cleaning',id = 'collapse-button-data-cleaning',className = 'mb-3',color = 'secondary'),
-			                       			dbc.Collapse(dbc.Card(dbc.CardBody('Process of detecting and correcting (or removing) corrupt or inaccurate records from a record set, table, or database and refers to identifying incomplete, incorrect, inaccurate or irrelevant parts of the data and then replacing, modifying, or deleting the dirty or coarse data')),id = 'collapse-data-cleaning', is_open=True),
-			                       		dbc.Button('Data Analysis',id = 'collapse-button-data-analysis',className = 'mb-3',color = 'secondary'),
-			                       			dbc.Collapse(dbc.Card(dbc.CardBody('Process of inspecting, cleansing, transforming and modeling data with the goal of discovering useful information, informing conclusions and supporting decision-making')),id = 'collapse-data-analysis', is_open=True),
-			                       		dbc.Button('Modelization',id = 'collapse-button-modelization',className = 'mb-3',color = 'secondary'),
-			                       			dbc.Collapse(dbc.Card(dbc.CardBody('Displaying data in a digestible and approachable way')),id = 'collapse-modelization', is_open=True),
-			                       		dbc.Button('Reporting',id = 'collapse-button-reporting',className = 'mb-3',color = 'secondary'),
-			                       			dbc.Collapse(dbc.Card(dbc.CardBody('This content is hidden in the collapse')),id = 'collapse-reporting', is_open=True),
-			                       		dbc.Button('Web',id = 'collapse-button-web',className = 'mb-3',color = 'secondary'),
-			                       			dbc.Collapse(dbc.Card(dbc.CardBody('Building portable app for using all the previous sections')),id = 'collapse-web', is_open=True)
-                       				])
+								#### Data Extraction
+
+								A considerable amount of data had to be obtained and properly curated before developing any prediction model. To ensure reliable information for this analysis, all data was retrieved from the Multiple Listing Service (MLS), an exclusive database of all brokered real estate transactions available only to licensed real estate agents. In all, 41,102 single family homes and 29,801 condo closed sales were analyzed and incorporated in the design of the final machine learning models.
+
+								#### Data Cleaning 
+
+								Once the data was gathered, the curation process began. Data imputation techniques and feature engineering concepts were implemented to properly cleanse and transform every single variable. Out of the more than 180 variables available in the MLS, ultimately only about 50 were selected and included in the dataset.
+
+								#### Data Analysis
+
+								In this part of the development, feature transformation and variable selection processes were applied once the dataset was properly curated. Variables were compared and evaluated to gauge their overall influence in the creation of future machine learning predictive models.
+
+								#### Data Modeling
+
+								This part of the development required testing multiple algorithms, such as linear regressions, Random Forest, Gradient Boosting, XGBoosting and Support Vector Machines. In the end XGBoost provided the most reliable results, in part due to its robustness and ability to deliver high performance and exceptional accuracy when compared to other tested algorithms. 
+								Furthermore, XGBoost offered the following additional advantages:
+								
+								*	**Regularization**: prevents overfitting by means of using L1 (Lasso Regression) and L2 (Ridge Regression) regularization, which can be controlled by changing the hyperparameters alpha and lambda respectively.
+								*	**Parallel Processing**: by using multiple CPU cores, it allows the algorithm to process much faster than it older counterpart, the Gradient Boosting Machine algorithm or GBM.
+								*	**Handling Missing Values**: a positive aspect of this algorithm, yet, not an issue for the dataset employed in this project since it has no missing values.
+								*	**Cross Validation**: allows the user to determine the exact number of boosting iterations in a single run for optimal results.
+								*	**Effective Tree Pruning**: the algorithm creates splits up to the specified max_depth value, pruning trees backwards and removing splits once there are no positive gains.
+
+								#### Reporting
+
+								Once a dependable model is developed, the next challenge is to put it into production. A formidable way to do so is to create a dashboard where the user is free to enter values for the different variables required to execute the model. One of the best currently available solutions that incorporates BI tools with Python is Plotly’s Dash library. By creating a dashboard using Dash in Python, it is possible to design a user-friendly web app that provides a highly reliable value assessment of any given residential property in South Florida up to $3.5 millions. The *ProSelling* app is an elegant and effective solution, unlike anything seeing today in the market.
+
+								#### Web
+
+								*ProSelling* is a web-based app, meaning it can not only be accessed locally on any computer if properly installed, but also remotely anywhere in the world where there is an internet connection. We have employed the well-known cloud application platform Heroku to deploy the app on the internet, providing the same user interface and level of performance as the local-version. 
+								""")
+						]),
+						# dbc.Row([
+						# 		html.Div([
+						# 				dbc.Button('Data Extraction',id = 'collapse-button-data-extraction',className = 'mb-3',color = 'secondary'),
+			   #                     			dbc.Collapse(dbc.Card(dbc.CardBody('Process that involves retrieval of data from various sources, in our case, we extract the data from real state agency')),id = 'collapse-data-extraction', is_open=True),
+			   #                     		dbc.Button('Data Cleaning',id = 'collapse-button-data-cleaning',className = 'mb-3',color = 'secondary'),
+			   #                     			dbc.Collapse(dbc.Card(dbc.CardBody('Process of detecting and correcting (or removing) corrupt or inaccurate records from a record set, table, or database and refers to identifying incomplete, incorrect, inaccurate or irrelevant parts of the data and then replacing, modifying, or deleting the dirty or coarse data')),id = 'collapse-data-cleaning', is_open=True),
+			   #                     		dbc.Button('Data Analysis',id = 'collapse-button-data-analysis',className = 'mb-3',color = 'secondary'),
+			   #                     			dbc.Collapse(dbc.Card(dbc.CardBody('Process of inspecting, cleansing, transforming and modeling data with the goal of discovering useful information, informing conclusions and supporting decision-making')),id = 'collapse-data-analysis', is_open=True),
+			   #                     		dbc.Button('Modelization',id = 'collapse-button-modelization',className = 'mb-3',color = 'secondary'),
+			   #                     			dbc.Collapse(dbc.Card(dbc.CardBody('Displaying data in a digestible and approachable way')),id = 'collapse-modelization', is_open=True),
+			   #                     		dbc.Button('Reporting',id = 'collapse-button-reporting',className = 'mb-3',color = 'secondary'),
+			   #                     			dbc.Collapse(dbc.Card(dbc.CardBody('This content is hidden in the collapse')),id = 'collapse-reporting', is_open=True),
+			   #                     		dbc.Button('Web',id = 'collapse-button-web',className = 'mb-3',color = 'secondary'),
+			   #                     			dbc.Collapse(dbc.Card(dbc.CardBody('Building portable app for using all the previous sections')),id = 'collapse-web', is_open=True)
+      #                  				])
 
 										# dbc.Toast(
 										#     [html.P("Process that involves retrieval of data from various sources, in our case, we extract the data from real state agency", className="mb-0")],
@@ -104,7 +135,7 @@ tab_1_layout = html.Div([
 										# 	    ])
 										#])
 																
-							],justify="center", align="center", className="h-50"),
+							#],justify="center", align="center", className="h-50"),
 						
 						html.Hr(),
 						dbc.Row([
@@ -178,7 +209,7 @@ tab_1_layout = html.Div([
 							dbc.Col(
 								dbc.Card(
 									    	[	
-										        dbc.CardImg(src='data:image/png;base64,{}'.format(test_base64_rafa), top=False),
+										        dbc.CardImg(src='data:image/png;base64,{}'.format(test_base64_arturo), top=False),
 										        dbc.CardBody(
 										            [
 										                html.H5("Arturo Lopez", className="card-title"),

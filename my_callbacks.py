@@ -12,6 +12,7 @@ from app import app
 import dash_html_components as html
 import dash_table
 import dash_bootstrap_components as dbc
+import dash_core_components as dcc
 
 
 ####### Inicialización de variables importantes de dataframe 
@@ -118,6 +119,34 @@ def update_progress(n):
     return progress, f"{progress} %" if progress >= 5 else ""
 
 ##########################################################################################################################
+
+#### Callback para el modal de ayuda para las variables de chalets y flats
+
+@app.callback(
+    Output("modal-chalets", "is_open"),
+    [Input("button-help-chalets", "n_clicks"), 
+    Input("close-modal-chalets", "n_clicks")],
+    [State("modal-chalets", "is_open")],
+)
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
+
+@app.callback(
+    Output("modal-flats", "is_open"),
+    [Input("button-help-flats", "n_clicks"), 
+    Input("close-modal-flats", "n_clicks")],
+    [State("modal-flats", "is_open")],
+)
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
+
+
+##########################################################################################################################
+
 
 ### Callback input prediction flats: Tiene como entrada los inputs de las variables y retorna el resultado por pantalla. También 
 ### devuelve los campos necesarios (data y columns) para que se actualicen los datos en la tabla en tiempo real.
@@ -462,7 +491,7 @@ def get_data_map(df_filter_graph):
 def update_output_div(input_value):
     emails_df = data_load.data_load_users_validated()
     if input_value in emails_df.values:
-        return ["Validated",1]
+        return [dcc.Markdown("**Validated**"),1]
     return ["Non validated",0]
     
 #####################################################################################
@@ -478,7 +507,7 @@ def update_output_div(input_value):
 def update_output_div(input_value):
     emails_df = data_load.data_load_users_validated()
     if input_value in emails_df.values:
-        return ["Validated",1]
+        return [dcc.Markdown("**Validated**"),1]
     return ["Non validated",0]
 
 #####################################################################################

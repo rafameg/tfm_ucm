@@ -21,7 +21,9 @@ valoresCity_Name = df_flats['City_Name'].value_counts().values
 etiquetasCity_Name = df_flats['City_Name'].value_counts().index
 
 tab_1_layout = html.Div([
-					
+					dbc.Row([
+						html.P("A continuación algunos filtros por lo que se puede manejar los datos")
+					]),
 					dbc.Row([
 			   			dbc.Col(
 							html.Div(
