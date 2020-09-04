@@ -34,14 +34,14 @@ Dash_App/
 
 |-- Tabs/
 
-	|-- … 
+	|-- files
 
 |-- Resources/
 
-	|-- … 
+	|-- files
 
 |-- Assets/
-	|-- … 
+	|-- files
 
 |-- requirements.txt
 
