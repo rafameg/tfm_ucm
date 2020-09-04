@@ -66,6 +66,6 @@ Contains all the html views and programmatic to displays and capture the data an
 Contains all the extra files needed for the running of the application.
 Most important file is:
 
-	####  data_load.py
+####  	data_load.py
 
-	Contains all the calls to the several Machine Learning algorithmns implemented, XGBM models, recommendation model, data_loads, etc.
+Contains all the calls to the several Machine Learning algorithmns implemented, XGBM models, recommendation model, data_loads, etc.
