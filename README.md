@@ -72,4 +72,22 @@ Contains all the calls to the several Machine Learning algorithmns implemented, 
 
 ## Screenshots
 
-![Introduction](resources/readme_Screenshots/introduction.png?raw=true "Optional Title")
+#### Introduction
+
+![Introduction](resources/readme_Screenshots/introduction.png?raw=true "Introduction view")
+
+
+#### Gallery
+
+![Introduction](resources/readme_Screenshots/gallery.png?raw=true "Gallery view")
+
+
+#### Reporting
+
+![Introduction](resources/readme_Screenshots/reporting.png?raw=true "Reporting view")
+
+
+
+#### Analysis
+
+![Introduction](resources/readme_Screenshots/analysis.png?raw=true "Analysis view")
