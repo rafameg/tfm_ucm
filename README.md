@@ -25,17 +25,28 @@ Then go to the browser and type: 0.0.0.0:8080
 The project is divided in several files and folders:
 
 Dash_App/
+
 |-- app.py
+
 |-- main.py
+
 |-- my_callbacks.py
+
 |-- Tabs/
-|-- … 
-|-- Resources/
+
 	|-- … 
+
+|-- Resources/
+
+	|-- … 
+
 |-- Assets/
 	|-- … 
+
 |-- requirements.txt
+
 |-- Procfile
+
 |-- README.MD
 
 
