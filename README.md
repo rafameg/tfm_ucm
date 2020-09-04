@@ -69,3 +69,7 @@ Most important file is:
 ####  	data_load.py
 
 Contains all the calls to the several Machine Learning algorithmns implemented, XGBM models, recommendation model, data_loads, etc.
+
+## Screenshots
+
+![Introduction](resources/readme_Screenshots/introduction.png?raw=true "Optional Title")
