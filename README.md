@@ -26,28 +26,23 @@ The project is divided in several files and folders:
 
 Dash_App/
 
-|-- app.py
+	|-- app.py
 
-|-- main.py
+	|-- main.py
 
-|-- my_callbacks.py
+	|-- my_callbacks.py
 
-|-- Tabs/
+	|-- Tabs/
 
-	|-- files
+	|-- Resources/
 
-|-- Resources/
+	|-- Assets/
 
-	|-- files
+	|-- requirements.txt
 
-|-- Assets/
-	|-- files
+	|-- Procfile
 
-|-- requirements.txt
-
-|-- Procfile
-
-|-- README.MD
+	|-- README.MD
 
 
 ### main.py 
