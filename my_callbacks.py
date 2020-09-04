@@ -594,5 +594,5 @@ def generatePredictionsChalets(n, bed, bath, hoa, pool, garage, built_year, wate
                                 html.P("No se ha encontrado ninguna recomendación. ")
                             ])
 
-        return data,columns,f'The predicted price for this property is in the interval (inf,sup) between ${limiteInferiorIntervalo} and ${limiteSuperiorIntervalo}', figura
+        return data,columns,f'The predicted price for this property is ${int(round(prediccion_precio[0]))} with an interval (inf,sup) between ${int(round(limiteInferiorIntervalo))} and ${int(round(limiteSuperiorIntervalo))}', figura
 
