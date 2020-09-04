@@ -70,6 +70,10 @@ Most important file is:
 
 Contains all the calls to the several Machine Learning algorithmns implemented, XGBM models, recommendation model, data_loads, etc.
 
+####  	resources/data_preparation folder
+
+Contains all the scripts for preparing the data and models.
+
 ## Screenshots
 
 #### Introduction
