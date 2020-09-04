@@ -78,7 +78,7 @@ Contains all the scripts for preparing the data and models.
 
 #### Introduction
 
-![Introduction](resources/readme_Screenshots/introduction.png?raw=true "Introduction view")
+![Introduction](resources/readme_Screenshots/welcome.png?raw=true "Introduction view")
 
 #### Gallery
 
