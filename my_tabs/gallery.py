@@ -8,17 +8,16 @@ from resources import data_load
 df_chalets = data_load.data_load_images_chalets()
 
 tab_1_layout = dbc.Container([
-    html.Hr(),
+    html.Br(),
     # Se Crea la PRIMERA FILA:
     dbc.Row([
         # La primera fila solo incluye UNA COLUMNA, esta columna
         # contiene el titulo de esta seccion:
-        dbc.Col(
-            html.Div([
-                html.H2('Chalets Image Gallery'),
-            ],style = {'text-align' : 'left'} ),
-            width={'offset' : 4}
-            )
+        
+        html.Div([
+            html.H2('Video Gallery'),
+        ],style = {'text-align' : 'left'} )
+            
     ]),
     html.Hr(),  # Añade un linea horizontal
 
@@ -31,7 +30,7 @@ tab_1_layout = dbc.Container([
                 dcc.Markdown(
                     id = 'markdown',
                     children = '''
-                        In this section you can see images of chalets in some of the most important cities in the state of **Florida**, taking into account some characteristic as a *garden* or *pool*.
+                        Immerse yourself in the city of your dreams. Click on any of the following videos of properties currently available for sale in the most emblematic areas of Miami. Find the property right for you and contact us to coordinate an appointment.
                     '''
                 )
             ]),
@@ -41,15 +40,25 @@ tab_1_layout = dbc.Container([
     dbc.Row([
         dbc.Col(
             html.Div([
-                html.Iframe(src = 'https://player.vimeo.com/video/254172349?autoplay=1',  style={'width': 700, 'height' : 400, 'horizontal-align': 'center'})
+                html.Iframe(src = 'https://player.vimeo.com/video/254172349?autoplay=1',  style={'width': 525, 'height' : 300, 'horizontal-align': 'center'})
             ],style = {'text-align' : 'left'} ),
-            width={'offset' : 2}
+            ),
+        dbc.Col(
+            html.Div([
+                html.Iframe(src = 'https://player.vimeo.com/video/245191755?autoplay=1',  style={'width': 525, 'height' : 300, 'horizontal-align': 'center'})
+            ],style = {'text-align' : 'left'} ),
             )
-        ]),
+
+    ]),
 
     
     html.Hr(),  # Añade un linea horizontal
-
+    html.H2("Image Gallery"),
+    html.Hr(),
+    dbc.Row([
+        html.P("texto introductrio")
+    ]),
+    html.Hr(),
     # Se Crea la TERCERA FILA:
     dbc.Row([
         # PRIMERA COLUMNA de la tercera fila, esta columna contiene el elemento de alarma

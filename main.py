@@ -9,7 +9,7 @@ app.layout = html.Div([
 							    dcc.Tabs(id="tabs-master", value='Introduction', 
 							    	children=[
 								        dcc.Tab(label='Introduction', value='Introduction'),
-								        dcc.Tab(label='Gallery', value='gallery'),
+								        dcc.Tab(label='Explore your city', value='gallery'),
 								        dcc.Tab(label='Reporting', value='Reporting'),
 								        dcc.Tab(label='Analysis', value='Analysis')
 							    ]),

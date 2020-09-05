@@ -67,6 +67,13 @@ def model_chalets_RLogistic_interval(input_data):
 	model = joblib.load('resources/models/model_RL_Chalets_interval.model')
 	return model.predict(listaEntradaModelo)
 
+def model_flats_RLogistic_interval(input_data):
+	listaEntradaModeloAux,listaEntradaModelo = [], []
+	listaEntradaModeloAux.append(input_data)
+	listaEntradaModelo.append(listaEntradaModeloAux)
+	model = joblib.load('resources/models/model_RL_Flats_interval.model')
+	return model.predict(listaEntradaModelo)
+
 def recommender_get_recomendation(isChalet,bed,fbath,garage,zip_code,living_area,built_year,predicted_price):
 	if isChalet == True:
 		datosRecomendador = datosRecomendadorChalets = data_load_chalets_recomendador()

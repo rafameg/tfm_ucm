@@ -8,6 +8,8 @@ import dash_table
 
 df_input = data_load.data_load_flats_predictions()
 
+
+
 tab_1_layout = html.Div([
 								dbc.Row([
 									dbc.Col(
@@ -40,22 +42,13 @@ tab_1_layout = html.Div([
 								##### Explicacion de las variables dentro del Rmarkdown.
 								dbc.Modal(
 						            [
-						                dbc.ModalHeader("Variable explanations"),
+						                dbc.ModalHeader("Flats Variable explanations flats"),
 						                dbc.ModalBody(dcc.Markdown("""
-								            The _**Signal Range**_ panel displays a histogram of the signal range of
-								            each tower in the dataset.  The dark gray bars represent the set of towers
-								            in the current selection, while the light gray bars underneath represent
-								            all towers in the dataset.
-								            
-								            Left-click drag to select histogram bars using the box-selection tool.
-								            
-								            The _**Clear Selection**_ button may be used to clear any selections
-								            applied in the _**Signal Range**_ panel, while leaving any selections
-								            applied in other panels unchanged.
-								        """)),
+														            This is a test
+														        """)),
 						                dbc.ModalFooter(
 						                    dbc.Button(
-						                        "Thanks", id="close-modal-flats", className="ml-auto"
+						                        "Thanks", id="close-modal-flats", n_clicks=0,className="ml-auto"
 						                    ),style={'textAlign': 'center'}
 						                ),
 						            ],

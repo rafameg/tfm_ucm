@@ -122,16 +122,7 @@ def update_progress(n):
 
 #### Callback para el modal de ayuda para las variables de chalets y flats
 
-@app.callback(
-    Output("modal-chalets", "is_open"),
-    [Input("button-help-chalets", "n_clicks"), 
-    Input("close-modal-chalets", "n_clicks")],
-    [State("modal-chalets", "is_open")],
-)
-def toggle_modal(n1, n2, is_open):
-    if n1 or n2:
-        return not is_open
-    return is_open
+
 
 @app.callback(
     Output("modal-flats", "is_open"),
@@ -144,6 +135,16 @@ def toggle_modal(n1, n2, is_open):
         return not is_open
     return is_open
 
+@app.callback(
+    Output("modal-chalets", "is_open"),
+    [Input("button-help-chalets", "n_clicks"), 
+    Input("close-modal-chalets", "n_clicks")],
+    [State("modal-chalets", "is_open")],
+)
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
 
 ##########################################################################################################################
 
@@ -253,6 +254,17 @@ def generatePredictionsFlats(n,bed,bath,hbath,garage,one_space,living_area,tile,
             data = df_final.to_dict('rows')
             columns = [{"name": i, "id": i,} for i in (df_final.columns)]
 
+
+
+        ### Llamamos al codigo para calcular el intervalo una vez obtenido el precio
+        coeficiente_intervalo_Array = data_load.model_flats_RLogistic_interval(int(prediccion_precio[0]))
+        coeficiente_intervalo = float(coeficiente_intervalo_Array[0]) # devuelve un array con un solo valor, nos quedamos con ese
+        print("Interval coefficient: " + str(coeficiente_intervalo))
+        limiteInferiorIntervalo = int(prediccion_precio[0]) - (int(prediccion_precio[0]) * coeficiente_intervalo)
+        limiteSuperiorIntervalo = int(prediccion_precio[0]) + (int(prediccion_precio[0]) * coeficiente_intervalo)
+
+
+        # Calculamos la recomendacion:
         ### El primer parámetro de la llamada es False porque True significa chalets y False significa Flats
         recomendacion = data_load.recommender_get_recomendation(False,bed,bath,garage,zip_code,living_area,year_built,prediccion_precio[0])
         if recomendacion.empty == False:
@@ -275,7 +287,7 @@ def generatePredictionsFlats(n,bed,bath,hbath,garage,one_space,living_area,tile,
                                 html.P("No se ha encontrado ninguna recomendación. ")
                             ])
 
-        return data,columns,f'The predicted price for this property is ${prediccion_precio[0]}',figura
+        return data,columns,f'The predicted price for this property is ${int(round(prediccion_precio[0]))} with an interval (inf,sup) between ${int(round(limiteInferiorIntervalo))} and ${int(round(limiteSuperiorIntervalo))}', figura
 
 ##########################################################################################################################
 
@@ -491,8 +503,20 @@ def get_data_map(df_filter_graph):
 def update_output_div(input_value):
     emails_df = data_load.data_load_users_validated()
     if input_value in emails_df.values:
-        return [dcc.Markdown("**Validated**"),1]
-    return ["Non validated",0]
+        return html.Img(
+                        id='button-help-flats',
+                        src="assets/bombillaEncendida.png",
+                        n_clicks=0,
+                        className='info-icon',
+                        style={'width' : 25, 'height' : 25},
+                    ),0
+    return html.Img(
+                        id='button-help-flats',
+                        src="assets/bombillaApagada.png",
+                        n_clicks=0,
+                        className='info-icon',
+                        style={'width' : 25, 'height' : 25},
+                    ),0
     
 #####################################################################################
 
@@ -507,8 +531,21 @@ def update_output_div(input_value):
 def update_output_div(input_value):
     emails_df = data_load.data_load_users_validated()
     if input_value in emails_df.values:
-        return [dcc.Markdown("**Validated**"),1]
-    return ["Non validated",0]
+        #return [dcc.Markdown("**Validated**"),1]
+        return html.Img(
+                        id='button-help-flats',
+                        src="assets/bombillaEncendida.png",
+                        n_clicks=0,
+                        className='info-icon',
+                        style={'width' : 25, 'height' : 25},
+                    ),0
+    return html.Img(
+                        id='button-help-flats',
+                        src="assets/bombillaApagada.png",
+                        n_clicks=0,
+                        className='info-icon',
+                        style={'width' : 25, 'height' : 25},
+                    ),0
 
 #####################################################################################
 
@@ -602,6 +639,9 @@ def generatePredictionsChalets(n, bed, bath, hoa, pool, garage, built_year, wate
         print("Interval coefficient: " + str(coeficiente_intervalo))
         limiteInferiorIntervalo = int(prediccion_precio[0]) - (int(prediccion_precio[0]) * coeficiente_intervalo)
         limiteSuperiorIntervalo = int(prediccion_precio[0]) + (int(prediccion_precio[0]) * coeficiente_intervalo)
+
+
+        ## Llamamos al código para calcular la recomendacion en base a los input del usuario
         recomendacion = data_load.recommender_get_recomendation(True,bed,bath,garage,zip_code,living_area,built_year,prediccion_precio[0])
         if recomendacion.empty == False:
             figura = html.Div([

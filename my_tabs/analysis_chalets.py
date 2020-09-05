@@ -41,7 +41,7 @@ tab_1_layout = html.Div([
 								##### Explicacion de las variables dentro del Rmarkdown.
 								dbc.Modal(
 						            [
-						                dbc.ModalHeader("Variable explanations"),
+						                dbc.ModalHeader("Chalets Variable explanations"),
 						                dbc.ModalBody(dcc.Markdown("""
 								            The _**Signal Range**_ panel displays a histogram of the signal range of
 								            each tower in the dataset.  The dark gray bars represent the set of towers
@@ -56,7 +56,7 @@ tab_1_layout = html.Div([
 								        """)),
 						                dbc.ModalFooter(
 						                    dbc.Button(
-						                        "Thanks", id="close-modal-chalets", className="ml-auto"
+						                        "Thanks", id="close-modal-chalets", n_clicks = 0,className="ml-auto"
 						                    ),style={'textAlign': 'center'}
 						                ),
 						            ],

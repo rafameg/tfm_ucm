@@ -51,7 +51,7 @@ tab_1_layout = html.Div([
 						]),
 						dbc.Row([
 							dcc.Markdown("""
-								## Project Structure \n
+								## Project Structure
 
 								#### Data Extraction
 
@@ -139,11 +139,9 @@ tab_1_layout = html.Div([
 						
 						html.Hr(),
 						dbc.Row([
-							html.H2("About us"),
+							html.H2("Team profiles"),
 						]),
-						dbc.Row([
-							html.P("We are a group of six people with different profiles: engineering, science, law, statistics, finance: ")
-						]),
+						html.Br(),
 						dbc.Row([
 							
 							dbc.Col(
@@ -235,7 +233,9 @@ tab_1_layout = html.Div([
 										)
 								)
 
-						])
+						]),
+						html.Br(),
+						html.Br()
 
 
 					])

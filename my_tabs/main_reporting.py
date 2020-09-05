@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output
 
 
 tab_1_layout = dbc.Container([
-					dcc.Tabs(id="tabs-reporting", value='Description', children=[
+					dcc.Tabs(id="tabs-reporting", value='ReportingChalets', children=[
 				        dcc.Tab(label='Reporting Flats', value='ReportingPisos'),
 				        dcc.Tab(label='Reporting Chalets', value='ReportingChalets'),
 				    ]),
