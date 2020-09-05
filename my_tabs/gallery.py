@@ -15,7 +15,7 @@ tab_1_layout = dbc.Container([
         # contiene el titulo de esta seccion:
         
         html.Div([
-            html.H2('Video Gallery'),
+            html.H2('Featured Virtual Tours'),
         ],style = {'text-align' : 'left'} )
             
     ]),
@@ -30,7 +30,7 @@ tab_1_layout = dbc.Container([
                 dcc.Markdown(
                     id = 'markdown',
                     children = '''
-                        Immerse yourself in the city of your dreams. Click on any of the following videos of properties currently available for sale in the most emblematic areas of Miami. Find the property right for you and contact us to coordinate an appointment.
+                        Immerse yourself in the city of your dreams. Click on any of the following virtual tours of properties currently available for sale in the most emblematic areas of Miami. Find the house or condo right for you and contact us to coordinate an appointment.
                     '''
                 )
             ]),
@@ -53,10 +53,10 @@ tab_1_layout = dbc.Container([
 
     
     html.Hr(),  # Añade un linea horizontal
-    html.H2("Image Gallery"),
+    html.H2("Featured Properties"),
     html.Hr(),
     dbc.Row([
-        html.P("texto introductrio")
+        html.P("Get yourself a little tour of your own through some of the most exclusive neighborhoods in Miami. Choose the key attributes of your ideal home or condo and get acquainted with the best buying opportunities available today.")
     ]),
     html.Hr(),
     # Se Crea la TERCERA FILA:

@@ -43,16 +43,26 @@ tab_1_layout = html.Div([
 						            [
 						                dbc.ModalHeader("Chalets Variable explanations"),
 						                dbc.ModalBody(dcc.Markdown("""
-								            The _**Signal Range**_ panel displays a histogram of the signal range of
-								            each tower in the dataset.  The dark gray bars represent the set of towers
-								            in the current selection, while the light gray bars underneath represent
-								            all towers in the dataset.
-								            
-								            Left-click drag to select histogram bars using the box-selection tool.
-								            
-								            The _**Clear Selection**_ button may be used to clear any selections
-								            applied in the _**Signal Range**_ panel, while leaving any selections
-								            applied in other panels unchanged.
+						                * __Bedrooms__: indicate the property’s number of legal bedrooms.
+
+						                * __Bathrooms__: indicate the property’s number of legal bathrooms.
+
+						                * __Garage Spots__: indicate the property’s number of spots available inside a garage, whether it is attached, detached or underground.
+
+						                * __Homeowners Association__: Is your property governed by homeowner’s association?
+
+						                * __Pool__: Does your property have an inground pool inside your property’s lot? (community pools do not apply).
+
+						                * __Waterfront__: Is your property located next to a body of water, such as an ocean, the Intracoastal Wterway, canal, lake, river or other similar body of water? 
+
+						                * __Living Area (Sq Ft)__: type your property’s total living area in square feet. For best results, verify that you are not indicating either the Actual Area or the Adjusted Area. The Living Area is considered the area of the property under A/C and should only take into consideration ½ of the garage if applicable. The value most be within 400 and 15,000 sq ft. Please do not type units, only numbers.
+
+						                * __Year Construction__: indicate the year when the property was built. Do not use this entry to include the year when it was purchased by its current owner or when a renovation was completed.
+
+						                * __Zip Code__: type the 5-digit area code corresponding to the property.
+
+						                * __Projected Days on the Market__: you may choose between the values of 30, 60 and 90 days depending on how aggressive you want to be price-wise when you are ready to put the property on the market. A higher number in this entry should render a higher price estimate.
+
 								        """)),
 						                dbc.ModalFooter(
 						                    dbc.Button(

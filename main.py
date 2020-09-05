@@ -8,11 +8,11 @@ app.layout = html.Div([
 							    html.H1('ProSelling - Real Estate Prediction Platform'),
 							    dcc.Tabs(id="tabs-master", value='Introduction', 
 							    	children=[
-								        dcc.Tab(label='Introduction', value='Introduction'),
+								        dcc.Tab(label='About ProSelling', value='Introduction'),
 								        dcc.Tab(label='Explore your city', value='gallery'),
-								        dcc.Tab(label='Reporting', value='Reporting'),
-								        dcc.Tab(label='Analysis', value='Analysis')
-							    ]),
+								        dcc.Tab(label='Neighborhood Analyzer', value='Reporting'),
+								        dcc.Tab(label='Price Estimator Tool', value='Analysis')
+							    ], style={'fontSize' : 18}),
 							    html.Div(id='tabs-content-master')
 							])
 

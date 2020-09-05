@@ -22,7 +22,7 @@ etiquetasCity_Name = df_flats['City_Name'].value_counts().index
 
 tab_1_layout = html.Div([
 					dbc.Row([
-						html.H2("Filter"),
+						html.H2("Custom Search"),
 					]),
 					dbc.Row([
 						html.P("A continuación algunos filtros por lo que se puede manejar los datos")
@@ -55,7 +55,7 @@ tab_1_layout = html.Div([
 			   			]),
 					html.Hr(),
 					dbc.Row([
-						html.H2("Top indicators")
+						html.H2("BI Power Results")
 					]),
 					dbc.Row([
 						dbc.Col([

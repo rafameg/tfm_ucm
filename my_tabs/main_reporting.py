@@ -8,13 +8,13 @@ from dash.dependencies import Input, Output
 
 tab_1_layout = dbc.Container([
 					dcc.Tabs(id="tabs-reporting", value='ReportingChalets', children=[
-				        dcc.Tab(label='Reporting Flats', value='ReportingPisos'),
-				        dcc.Tab(label='Reporting Chalets', value='ReportingChalets'),
-				    ]),
+				        dcc.Tab(label='Condos and Townhomes', value='ReportingPisos'),
+				        dcc.Tab(label='Single Family Homes', value='ReportingChalets'),
+				    ], style={'fontSize' : 18}),
 				    dbc.Row([
 						html.Div([
-									html.H2("Reporting"),
-									html.P("Business intelligence reporting, or BI reporting, is the process of gathering data by utilizing different software and tools to extract relevant insights. Ultimately, it provides suggestions and observations about business trends, empowering decision-makers to act.")
+									html.Br(),
+									html.P("Take advantage of ProSelling’s cutting-edge business intelligence tools to analyze a wide array of properties recently sold in the tri-county area. Choose between Condos and Townhomes or Single-Family Homes and customize your search by selecting one or multiple cities and your desired maximum price range. Review the resulting table with matching properties and key features and locate each one of them on the integrated fully dynamic map. Do want to learn more about these properties? Scroll down and get access to additional statistical data about the county and city where these condos or homes are located.")
 								])
 					]),
 					html.Hr(),
