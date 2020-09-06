@@ -16,7 +16,9 @@ precioMinimo_df_chalets = df_chalets['Sale_Price'].min()
 
 
 tab_1_layout = html.Div([
-
+					dbc.Row([
+						html.H2("Custom Search"),
+					]),
 					dbc.Row([
 			   			dbc.Col(
 							html.Div(
@@ -33,7 +35,7 @@ tab_1_layout = html.Div([
 								html.Div(
 									dcc.Input(
 										id = 'filter-price-chalets',
-										placeholder = "Please enter a price",
+										placeholder = "Maximum Desired Price",
 										style = dict(
 										            width = '40%',
 										            display = 'table-cell'
@@ -43,6 +45,9 @@ tab_1_layout = html.Div([
 							)
 			   			]),
 					html.Hr(),
+					dbc.Row([
+						html.H2("BI Power Results")
+					]),
 					dbc.Row([
 						dbc.Col([
 								dcc.Loading(
@@ -158,6 +163,7 @@ tab_1_layout = html.Div([
 											)
 										],
 										'layout': dict(
+											title="Neighborhood Dynamic Map",
 											autosize = True,
 											hovermode = 'closest',
 											showlegend = False,

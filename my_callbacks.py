@@ -345,6 +345,7 @@ def update_data(data_json): # Lo que recibe esta funcion son los datos en format
                 {
                     'data': get_data_map(df_filter_graph),
                     'layout': dict(
+                        title="Neighborhood Dynamic Map",
                         autosize = True,
                         hovermode = 'closest',
                         showlegend = False,
@@ -447,6 +448,7 @@ def update_data(data_json): # Lo que recibe esta funcion son los datos en format
                 {
                     'data': get_data_map(df_filter_graph),
                     'layout': dict(
+                        title="Neighborhood Dynamic Map",
                         autosize = True,
                         hovermode = 'closest',
                         showlegend = False,
@@ -496,8 +498,7 @@ def get_data_map(df_filter_graph):
 
 
 @app.callback(
-    [Output(component_id='output-userEmail-flats', component_property='children'),
-     Output(component_id='output-userEmailStatus-flats', component_property='value')],
+    Output(component_id='output-userEmail-flats', component_property='children'),
     [Input(component_id='input-userEmail-flats', component_property='value')]
 )
 def update_output_div(input_value):
@@ -507,16 +508,14 @@ def update_output_div(input_value):
                         id='button-help-flats',
                         src="assets/bombillaEncendida.png",
                         n_clicks=0,
-                        className='info-icon',
                         style={'width' : 25, 'height' : 25},
-                    ),0
+                    )
     return html.Img(
                         id='button-help-flats',
                         src="assets/bombillaApagada.png",
                         n_clicks=0,
-                        className='info-icon',
                         style={'width' : 25, 'height' : 25},
-                    ),0
+                    )
     
 #####################################################################################
 
@@ -524,8 +523,8 @@ def update_output_div(input_value):
 
 
 @app.callback(
-    [Output(component_id='output-userEmail-chalets', component_property='children'),
-     Output(component_id='output-userEmailStatus-chalets', component_property='value')],
+    
+    Output(component_id='output-userEmail-chalets', component_property='children'),
     [Input(component_id='input-userEmail-chalets', component_property='value')]
 )
 def update_output_div(input_value):
@@ -536,16 +535,14 @@ def update_output_div(input_value):
                         id='button-help-flats',
                         src="assets/bombillaEncendida.png",
                         n_clicks=0,
-                        className='info-icon',
                         style={'width' : 25, 'height' : 25},
-                    ),0
+                    )
     return html.Img(
                         id='button-help-flats',
                         src="assets/bombillaApagada.png",
                         n_clicks=0,
-                        className='info-icon',
                         style={'width' : 25, 'height' : 25},
-                    ),0
+                    )
 
 #####################################################################################
 
@@ -646,7 +643,7 @@ def generatePredictionsChalets(n, bed, bath, hoa, pool, garage, built_year, wate
         if recomendacion.empty == False:
             figura = html.Div([
                             html.Hr(),
-                            dbc.Row([html.P("Se han encontrado datos de inmuebles similares a los que estás interesado en vender. ")]),
+                            dbc.Row([html.P("Below you will find a list of properties sold in the past 12 months best resembling the features of the property previously analyzed. The number of comparables available varies depending on the features of your property and how common those features are found in your area. If no list is rendered, there might be no properties recently sold in your area with similar attributes. ")]),
                             dbc.Row([
                                 dbc.Col( 
                                     dash_table.DataTable(
@@ -660,7 +657,7 @@ def generatePredictionsChalets(n, bed, bath, hoa, pool, garage, built_year, wate
         else:
             figura = html.Div([
                                 html.Hr(),
-                                html.P("No se ha encontrado ninguna recomendación. ")
+                                html.P("No properties found")
                             ])
 
         return data,columns,f'The predicted price for this property is ${int(round(prediccion_precio[0]))} with an interval (inf,sup) between ${int(round(limiteInferiorIntervalo))} and ${int(round(limiteSuperiorIntervalo))}', figura

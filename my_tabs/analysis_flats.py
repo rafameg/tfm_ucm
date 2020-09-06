@@ -32,23 +32,46 @@ tab_1_layout = html.Div([
 									dbc.Col(
 										html.Img(
 					                        id='button-help-flats',
-					                        src="assets/question-circle-solid.svg",
-					                        n_clicks=0,
-					                        className='info-icon',
+					                        src="assets/question-circle-solid-flats.svg",
+					                        n_clicks=1,
 					                        style={'width' : 25, 'height' : 25},
 					                    ),
 				                    )
 								]),
+								dbc.Row([
 								##### Explicacion de las variables dentro del Rmarkdown.
 								dbc.Modal(
 						            [
 						                dbc.ModalHeader("Flats Variable explanations flats"),
 						                dbc.ModalBody(dcc.Markdown("""
-														            This is a test
+														            * __Bedrooms__: indicate the property’s number of legal bedrooms
+														            * __Bathrooms__: indicate the property’s number of legal bathrooms.
+														            * __Half Baths__: indicate the property’s number of powder room bathrooms, i.e. bathrooms without a shower or bathtub. 
+														            * __Garage Spots__: indicate the property’s number of spots available inside a garage, whether it is attached, detached or underground. Any available or assigned parking spots not inside a garage, may not be included.
+														            * __One Space__: If your property has only one parking space assigned, whether it is inside a garage or uncovered, you should select “Yes”, otherwise, select “No”.
+														            * __Living Area (Sq Ft)__: type your property’s total living area in square feet. For best results, verify that you are not indicating either the Actual Area or the Adjusted Area. The Living Area is considered the area of the property under A/C and should only take into consideration ½ of the garage if applicable. The value most be within 400 and 15,000 sq. ft. Please do not type units, only numbers.
+														            * __Tile__: If your property has tile floors in any part of your living area, you should select “Yes”, otherwise, select “No”.
+														            * __Carpeted__: If your property has carpet in any part of your living area, you should select “Yes”, otherwise, select “No”.
+														            * __Ceramic__: If your property has ceramic floors in any part of your living area, you should select “Yes”, otherwise, select “No”.
+														            * __Wood__: If your property has wood floors in any part of your living area, you should select “Yes”, otherwise, select “No”.
+														            * __Waterfront__: Is your property located next to a body of water, such as an ocean, the Intracoastal Waterway, canal, lake, river or other similar body of water? 
+														            * __Two/more spaces__: If your property has two or more parking spaces assigned, whether it is inside a garage and/or uncovered, you should select “Yes”, otherwise, select “No”.
+														            * __Ocean View__: select “Yes” if your property has direct ocean views, otherwise, select “No”.
+														            * __Housing Older Persons Act__: if your property is located within a +55 community, you should select “Verified”. However, if it is not located in a +55 community or you are not sure, you should select “No HOPA” or “Unverified” respectively.
+														            * __Intracoastal View__: select “Yes” if your property has direct Intracoastal Waterway views as your primary view, otherwise, select “No”.
+														            * __Pets Allowed__: Does your condo association accept pets? If so select “Yes”, otherwise select “No” (select “Yes” even if the condo association accepts pets with certain restrictions).
+														            * __Style__: Choose the style of property that best describes yours.
+														            * __Year Built__: indicate the year when the property was built. Do not use this entry to include the year when it was purchased by its current owner or when a renovation was completed.
+														            * __East of US-1__: Is your property located east of U.S. Route 1, better known as the “US-1”.
+														            * __Corner Unit__: Is your property located in a corner of your building? If so, select “Yes”, otherwise, select “No”. 
+														            * __Zip Code__: type the 5-digit area code corresponding to the property.
+														            * __NLFYO__: please select “NO” if your condo association allows any potential new buyers to rent the property immediately after purchase. Otherwise, select “Yes” if the condo association only accepts rentals after the first year of ownership.
+														            * __Assoc. Fee Paid__: enter the digits corresponding to the amount of your monthly condo association dues. Please do not include the $ sign.
+														            * __Ready to Lease__: If your condo association has no rental restrictions, you should enter “Yes”, otherwise, select “No”. 
 														        """)),
 						                dbc.ModalFooter(
 						                    dbc.Button(
-						                        "Thanks", id="close-modal-flats", n_clicks=0,className="ml-auto"
+						                        "Got it!", id="close-modal-flats", n_clicks=0
 						                    ),style={'textAlign': 'center'}
 						                ),
 						            ],
@@ -56,6 +79,7 @@ tab_1_layout = html.Div([
 						            centered=True,
 						            size='xl'
 						        ),
+								]),
 							    dbc.Row([
 							        dbc.Col(html.P('Bedrooms'),
 							                    width={'size': 1, 'offset':1},
@@ -662,7 +686,7 @@ tab_1_layout = html.Div([
 						        html.Span(id="example-output", style={"vertical-align": "middle"}),
 						        html.Br(),
 						        html.Hr(),
-						        html.P("Data automatically updated: "),
+						        html.P("The following table includes all the recently performed searches using ProSelling’s Price Estimator Tool. You may review this table to gauge where the market is heading (buyers or sellers markets) and what type of properties and areas may become popular in the near future. "),
 						        dash_table.DataTable(
 												        id='tabla-analisis-flats',
 												        columns=[{'name':i, 'id':i} for i in df_input.columns],

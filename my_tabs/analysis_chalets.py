@@ -31,7 +31,7 @@ tab_1_layout = html.Div([
 									dbc.Col(
 										html.Img(
 					                        id='button-help-chalets',
-					                        src="assets/question-circle-solid.svg",
+					                        src="assets/question-circle-solid-chalets.svg",
 					                        n_clicks=0,
 					                        className='info-icon',
 					                        style={'width' : 25, 'height' : 25},
@@ -66,7 +66,7 @@ tab_1_layout = html.Div([
 								        """)),
 						                dbc.ModalFooter(
 						                    dbc.Button(
-						                        "Thanks", id="close-modal-chalets", n_clicks = 0,className="ml-auto"
+						                        "Got it!", id="close-modal-chalets", n_clicks = 0,className="ml-auto"
 						                    ),style={'textAlign': 'center'}
 						                ),
 						            ],
@@ -549,7 +549,7 @@ tab_1_layout = html.Div([
 							    ])
 						    ),
 						    html.Hr(),
-					        html.P("Data automatically updated: "),
+					        html.P("The following table includes all the recently performed searches using ProSelling’s Price Estimator Tool. You may review this table to gauge where the market is heading (buyers or sellers markets) and what type of properties and areas may become popular in the near future. "),
 					        dash_table.DataTable(
 											        id='tabla-analisis-chalets',
 											        columns=[{'name':i, 'id':i} for i in df_input.columns],

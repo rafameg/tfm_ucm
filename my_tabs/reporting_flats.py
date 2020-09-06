@@ -25,9 +25,6 @@ tab_1_layout = html.Div([
 						html.H2("Custom Search"),
 					]),
 					dbc.Row([
-						html.P("A continuación algunos filtros por lo que se puede manejar los datos")
-					]),
-					dbc.Row([
 			   			dbc.Col(
 							html.Div(
 								#html.P(id='idmio', className="indicator_value"),
@@ -44,7 +41,7 @@ tab_1_layout = html.Div([
 								html.Div(
 									dcc.Input(
 										id = 'filter-price-flats',
-										placeholder = "Please enter a price",
+										placeholder = "Maximum Desired Price",
 										style = dict(
 										            width = '40%',
 										            display = 'table-cell'
@@ -112,9 +109,6 @@ tab_1_layout = html.Div([
 		            ]),
 			   		html.Br(),
 			   		dbc.Row([
-			   			html.H2("Data table")
-			   		]),
-			   		dbc.Row([
 						dbc.Col(
 							html.Div(
 								# Y dentro de este DIV es donde incluimos el DataTable
@@ -171,10 +165,11 @@ tab_1_layout = html.Div([
 											go.Scattermapbox(
 												lat=df_flats['latitude'],
 												lon=df_flats['longitude'],
-												mode='markers',
+												mode='markers'
 											)
 										],
 										'layout': dict(
+											title="Neighborhood Dynamic Map",
 											autosize = True,
 											hovermode = 'closest',
 											showlegend = False,
