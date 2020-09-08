@@ -42,12 +42,6 @@ tab_1_layout = html.Div([
 
 												"""))
 									]),
-
-								#html.Iframe(src = 'https://player.vimeo.com/video/254172349'),
-								# html.P("Percentage of accomplishment is: "),
-								# html.Div([
-								#         dbc.Progress("50%", value=50,  style={"height": "30px", "width":"1000px"})
-								# ])
 						]),
 						dbc.Row([
 							dcc.Markdown("""
@@ -85,61 +79,10 @@ tab_1_layout = html.Div([
 								*ProSelling* is a web-based app, meaning it can not only be accessed locally on any computer if properly installed, but also remotely anywhere in the world where there is an internet connection. We have employed the well-known cloud application platform Heroku to deploy the app on the internet, providing the same user interface and level of performance as the local-version. 
 								""")
 						]),
-						# dbc.Row([
-						# 		html.Div([
-						# 				dbc.Button('Data Extraction',id = 'collapse-button-data-extraction',className = 'mb-3',color = 'secondary'),
-			   #                     			dbc.Collapse(dbc.Card(dbc.CardBody('Process that involves retrieval of data from various sources, in our case, we extract the data from real state agency')),id = 'collapse-data-extraction', is_open=True),
-			   #                     		dbc.Button('Data Cleaning',id = 'collapse-button-data-cleaning',className = 'mb-3',color = 'secondary'),
-			   #                     			dbc.Collapse(dbc.Card(dbc.CardBody('Process of detecting and correcting (or removing) corrupt or inaccurate records from a record set, table, or database and refers to identifying incomplete, incorrect, inaccurate or irrelevant parts of the data and then replacing, modifying, or deleting the dirty or coarse data')),id = 'collapse-data-cleaning', is_open=True),
-			   #                     		dbc.Button('Data Analysis',id = 'collapse-button-data-analysis',className = 'mb-3',color = 'secondary'),
-			   #                     			dbc.Collapse(dbc.Card(dbc.CardBody('Process of inspecting, cleansing, transforming and modeling data with the goal of discovering useful information, informing conclusions and supporting decision-making')),id = 'collapse-data-analysis', is_open=True),
-			   #                     		dbc.Button('Modelization',id = 'collapse-button-modelization',className = 'mb-3',color = 'secondary'),
-			   #                     			dbc.Collapse(dbc.Card(dbc.CardBody('Displaying data in a digestible and approachable way')),id = 'collapse-modelization', is_open=True),
-			   #                     		dbc.Button('Reporting',id = 'collapse-button-reporting',className = 'mb-3',color = 'secondary'),
-			   #                     			dbc.Collapse(dbc.Card(dbc.CardBody('This content is hidden in the collapse')),id = 'collapse-reporting', is_open=True),
-			   #                     		dbc.Button('Web',id = 'collapse-button-web',className = 'mb-3',color = 'secondary'),
-			   #                     			dbc.Collapse(dbc.Card(dbc.CardBody('Building portable app for using all the previous sections')),id = 'collapse-web', is_open=True)
-      #                  				])
-
-										# dbc.Toast(
-										#     [html.P("Process that involves retrieval of data from various sources, in our case, we extract the data from real state agency", className="mb-0")],
-										#     header="Data Extraction",
-										# ),
-										# dbc.Toast(
-										#     [html.P("process of detecting and correcting (or removing) corrupt or inaccurate records from a record set, table, or database and refers to identifying incomplete, incorrect, inaccurate or irrelevant parts of the data and then replacing, modifying, or deleting the dirty or coarse data", className="mb-0")],
-										#     header="Data Cleaning",
-										# ),
-										# dbc.Toast(
-										#     [html.P("Process of inspecting, cleansing, transforming and modeling data with the goal of discovering useful information, informing conclusions and supporting decision-making", className="mb-0")],
-										#     header="Data Analysis",
-										# ),
-										# dbc.Toast(
-										#     [html.P("This is the content of the toast", className="mb-0")],
-										#     header="Modelization",
-										# ),
-										# dbc.Toast(
-										#     [html.P("This is the content of the toast", className="mb-0")],
-										#     header="Reporting",
-										# ),
-										# dbc.Toast(
-										#     [html.P("This is the content of the toast", className="mb-0")],
-										#     header="Web",
-										# )
-										# dbc.ListGroup([
-										# 	        dbc.ListGroupItem("Extract, transform and load", color="primary"),
-										# 	        dbc.ListGroupItem("Data Cleaning", color="secondary"),
-										# 	        dbc.ListGroupItem("Data Analysis", color="success"),
-										# 	        dbc.ListGroupItem("Modelization", color="warning"),
-										# 	        dbc.ListGroupItem("Reporting", color="danger"),
-										# 	        dbc.ListGroupItem("Web", color="info"),
-										# 	    ])
-										#])
-																
-							#],justify="center", align="center", className="h-50"),
 						
 						html.Hr(),
 						dbc.Row([
-							html.H2("Team profiles"),
+							html.H2("Team Profiles"),
 						]),
 						html.Br(),
 						dbc.Row([
@@ -193,7 +136,7 @@ tab_1_layout = html.Div([
 							dbc.Col(
 								dbc.Card(
 									    	[	
-										        dbc.CardImg(src='data:image/png;base64,{}'.format(test_base64_javier), top=False),
+										        dbc.CardImg(src='data:image/png;base64,{}'.format(test_base64_javier), top=False,style={"height" : 260}),
 										        dbc.CardBody(
 										            [
 										                html.H5("Javier Alonso", className="card-title"),
@@ -221,7 +164,7 @@ tab_1_layout = html.Div([
 							dbc.Col(
 								dbc.Card(
 									    	[	
-										        dbc.CardImg(src='data:image/png;base64,{}'.format(test_base64_miguel), top=False),
+										        dbc.CardImg(src='data:image/png;base64,{}'.format(test_base64_miguel), top=False, style={"height" : 260}),
 										        dbc.CardBody(
 										            [
 										                html.H5("Miguel Molina", className="card-title"),

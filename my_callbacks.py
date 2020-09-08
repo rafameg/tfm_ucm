@@ -329,7 +329,10 @@ def save_filter_data(cities,prices):
      Output('map-flats','figure'),
      Output('indicator-ownerships-flats','value'),
      Output('indicator-min-price-flats','value'),
-     Output('indicator-max-price-flats','value')],
+     Output('indicator-max-price-flats','value'),
+     Output('graph-flats-sell','figure'),
+     Output('graph-flats-county','figure'),
+     Output('graph-flats-year_built','figure')],
     [Input('intermediate_filter_data_flats', 'data')] 
 )
 
@@ -338,6 +341,15 @@ def update_data(data_json): # Lo que recibe esta funcion son los datos en format
                             # que corresponden a los datos ya filtrados segun los dropdown
     # Lo primero es leer esos datos recibidos:
     df_filter_graph = pd.read_json(data_json)
+
+    valoresVendidos = df_filter_graph['Sale_Price'].value_counts().values
+    etiquetasVendidos = df_filter_graph['Sale_Price'].value_counts().index
+
+    valoresCounty = df_filter_graph['County'].value_counts().values
+    etiquetasCounty = df_filter_graph['County'].value_counts().index
+
+    valoresYearBuilt = df_filter_graph['Year_Built'].value_counts().head(20).values
+    etiquetasYearBuilt = df_filter_graph['Year_Built'].value_counts().head(20).index
     # Se devuelven los valores, hay que tener en cuenta que se
     # devuelve un diccionario de registros:
     return [
@@ -368,7 +380,34 @@ def update_data(data_json): # Lo que recibe esta funcion son los datos en format
                 },
                 df_filter_graph.shape[0],
                 df_filter_graph['Sale_Price'].min(),
-                df_filter_graph['Sale_Price'].max()
+                df_filter_graph['Sale_Price'].max(),
+                {
+                    'data': [
+                        {'x': list(valoresVendidos), 'y': list(etiquetasVendidos), 'type': 'bar'}
+                    ],
+                    'layout': {
+                        'title': 'Closed Sells $'
+                    }
+                },
+                {
+                    'data': [
+                        {'x': list(etiquetasCounty), 'y': list(valoresCounty), 'type': 'bar'}
+                    ],
+                    'layout': {
+                        'title': 'County Classification'
+                    }
+                },
+                {
+                    'data': [
+                                go.Pie(
+                                    labels=list(etiquetasYearBuilt), 
+                                    values=list(valoresYearBuilt)
+                                )
+                            ],
+                    'layout': {
+                        'title': 'Year Built Classification'
+                    }
+                }
             ]
 
 
@@ -432,7 +471,10 @@ def save_filter_data(cities,prices):
      Output('map-chalets','figure'),
      Output('indicator-ownerships-chalets','value'),
      Output('indicator-min-price-chalets','value'),
-     Output('indicator-max-price-chalets','value')],
+     Output('indicator-max-price-chalets','value'),
+     Output('graph-chalets-sell','figure'),
+     Output('graph-chalets-county','figure'),
+     Output('graph-chalets-year_built','figure')],
     [Input('intermediate_filter_data_chalets', 'data')] 
 )
 
@@ -441,6 +483,16 @@ def update_data(data_json): # Lo que recibe esta funcion son los datos en format
                             # que corresponden a los datos ya filtrados segun los dropdown
     # Lo primero es leer esos datos recibidos:
     df_filter_graph = pd.read_json(data_json)
+
+    valoresVendidos = df_filter_graph['Sale_Price'].value_counts().values
+    etiquetasVendidos = df_filter_graph['Sale_Price'].value_counts().index
+
+    valoresCounty = df_filter_graph['County'].value_counts().values
+    etiquetasCounty = df_filter_graph['County'].value_counts().index
+
+    valoresYearBuilt = df_filter_graph['Year_Built'].value_counts().head(20).values
+    etiquetasYearBuilt = df_filter_graph['Year_Built'].value_counts().head(20).index
+
     # Se devuelven los valores, hay que tener en cuenta que se
     # devuelve un diccionario de registros:
     return [
@@ -471,7 +523,35 @@ def update_data(data_json): # Lo que recibe esta funcion son los datos en format
                 },
                 df_filter_graph.shape[0],
                 df_filter_graph['Sale_Price'].min(),
-                df_filter_graph['Sale_Price'].max()
+                df_filter_graph['Sale_Price'].max(),
+                {
+                    'data': [
+                        {'x': list(valoresVendidos), 'y': list(etiquetasVendidos), 'type': 'bar'}
+                    ],
+                    'layout': {
+                        'title': 'Closed Sells $'
+                    }
+                },
+                {
+                    'data': [
+                        {'x': list(etiquetasCounty), 'y': list(valoresCounty), 'type': 'bar'}
+                    ],
+                    'layout': {
+                        'title': 'County Classification'
+                    }
+                },
+                {
+                    'data': [
+                                go.Pie(
+                                    labels=list(etiquetasYearBuilt), 
+                                    values=list(valoresYearBuilt)
+                                )
+                            ],
+                    'layout': {
+                        'title': 'Year Built Classification'
+                    }
+                }
+                
             ]
 
 

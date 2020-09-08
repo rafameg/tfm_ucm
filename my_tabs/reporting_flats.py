@@ -10,15 +10,19 @@ import dash_daq as daq
 
 
 df_flats = data_load.data_load_flats()
+
 numRegistros_df_flats = df_flats.shape[0]
 precioMaximo_df_flats = df_flats['Sale_Price'].max()
 precioMinimo_df_flats = df_flats['Sale_Price'].min()
 
+valoresVendidos = df_flats['Sale_Price'].value_counts().values
+etiquetasVendidos = df_flats['Sale_Price'].value_counts().index
+
 valoresCounty = df_flats['County'].value_counts().values
 etiquetasCounty = df_flats['County'].value_counts().index
 
-valoresCity_Name = df_flats['City_Name'].value_counts().values
-etiquetasCity_Name = df_flats['City_Name'].value_counts().index
+valoresYearBuilt = df_flats['Year_Built'].value_counts().head(20).values
+etiquetasYearBuilt = df_flats['Year_Built'].value_counts().head(20).index
 
 tab_1_layout = html.Div([
 					dbc.Row([
@@ -60,7 +64,7 @@ tab_1_layout = html.Div([
 								html.Div(
 					                id="card-1",
 					                children=[
-					                    html.P("Number of ownerships using:"),
+					                    html.P("Number of Closed Sells:"),
 					                    daq.LEDDisplay(
 					                        id="indicator-ownerships-flats",
 					                        value=numRegistros_df_flats,
@@ -77,7 +81,7 @@ tab_1_layout = html.Div([
 								html.Div(
 					                id="card-1",
 					                children=[
-					                    html.P("Minimum price sell:"),
+					                    html.P("Minimum Sale Price:"),
 					                    daq.LEDDisplay(
 					                        id="indicator-min-price-flats",
 					                        value=precioMinimo_df_flats,
@@ -94,7 +98,7 @@ tab_1_layout = html.Div([
 								html.Div(
 					                id="card-1",
 					                children=[
-					                    html.P("Max price sell:"),
+					                    html.P("Maximum Sale Price:"),
 					                    daq.LEDDisplay(
 					                        id="indicator-max-price-flats",
 					                        value=precioMaximo_df_flats,
@@ -201,7 +205,21 @@ tab_1_layout = html.Div([
 					dbc.Row([
 						dbc.Col(
 							dcc.Graph(
-								id='example-graph-1',
+								id='graph-flats-sell',
+						        figure={
+						            'data': [
+						                {'x': list(etiquetasVendidos), 'y': list(valoresVendidos), 'type': 'bar'}
+						            ],
+						            'layout': {
+						                'title': 'Closed Sells $'
+						            }
+						        }
+							    
+							)
+						),
+						dbc.Col(
+							dcc.Graph(
+								id='graph-flats-county',
 						        figure={
 						            'data': [
 						                {'x': list(etiquetasCounty), 'y': list(valoresCounty), 'type': 'bar'}
@@ -215,43 +233,22 @@ tab_1_layout = html.Div([
 						),
 						dbc.Col(
 							dcc.Graph(
-								id='example-graph-2',
+								id='graph-flats-year_built',
 						        figure={
 						            'data': [
 									            go.Pie(
-									                labels=list(etiquetasCounty), 
-									                values=list(valoresCounty)
+									                labels=list(etiquetasYearBuilt), 
+									                values=list(valoresYearBuilt)
 									            )
 									        ],
 						            'layout': {
-						                'title': 'County Classification'
+						                'title': 'Year Built Classification'
 						            }
 						        }
 							    
 							)
-						),
-						dbc.Col(
-							html.Div([
-								dcc.Graph(
-									id='example-graph-3',
-							        figure={
-							            'data': [
-										            go.Pie(
-										                labels=list(etiquetasCity_Name), 
-										                values=list(valoresCity_Name)
-										            )
-										        ],
-							            'layout': {
-							                'title': 'City Classification',
-							                'showlegend' :  False,
-							                'textinfo' : 'none'
-							                #'textposition': ['none','none','none','none','none','none','none']
-							            }
-							        }
-								    
-								)
-							],style={"height": "100%", "width": "100%"})
 						)
+
 								
 							
 					]),

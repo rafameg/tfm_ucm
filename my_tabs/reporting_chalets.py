@@ -14,6 +14,15 @@ numRegistros_df_chalets = df_chalets.shape[0]
 precioMaximo_df_chalets = df_chalets['Sale_Price'].max()
 precioMinimo_df_chalets = df_chalets['Sale_Price'].min()
 
+valoresVendidos = df_chalets['Sale_Price'].value_counts().values
+etiquetasVendidos = df_chalets['Sale_Price'].value_counts().index
+
+valoresCounty = df_chalets['County'].value_counts().values
+etiquetasCounty = df_chalets['County'].value_counts().index
+
+valoresYearBuilt = df_chalets['Year_Built'].value_counts().head(20).values
+etiquetasYearBuilt = df_chalets['Year_Built'].value_counts().head(20).index
+
 
 tab_1_layout = html.Div([
 					dbc.Row([
@@ -54,7 +63,7 @@ tab_1_layout = html.Div([
 									html.Div(
 						                id="card-1",
 						                children=[
-						                    html.P("Number of ownerships using:"),
+						                    html.P("Number of Closed Sells:"),
 						                    daq.LEDDisplay(
 						                        id="indicator-ownerships-chalets",
 						                        value=numRegistros_df_chalets,
@@ -71,7 +80,7 @@ tab_1_layout = html.Div([
 									html.Div(
 						                id="card-1",
 						                children=[
-						                    html.P("Minimum price sell:"),
+						                    html.P("Minimum Sale Price:"),
 						                    daq.LEDDisplay(
 						                        id="indicator-min-price-chalets",
 						                        value=precioMinimo_df_chalets,
@@ -88,7 +97,7 @@ tab_1_layout = html.Div([
 									html.Div(
 						                id="card-1",
 						                children=[
-						                    html.P("Max price sell:"),
+						                    html.P("Maximum Sale Price:"),
 						                    daq.LEDDisplay(
 						                        id="indicator-max-price-chalets",
 						                        value=precioMaximo_df_chalets,
@@ -192,7 +201,56 @@ tab_1_layout = html.Div([
 
 						)
 					]),
+					dbc.Row([
+						dbc.Col(
+							dcc.Graph(
+								id='graph-chalets-sell',
+						        figure={
+						            'data': [
+						                {'x': list(etiquetasVendidos), 'y': list(valoresVendidos), 'type': 'bar'}
+						            ],
+						            'layout': {
+						                'title': 'Closed Sells $'
+						            }
+						        }
+							    
+							)
+						),
+						dbc.Col(
+							dcc.Graph(
+								id='graph-chalets-county',
+						        figure={
+						            'data': [
+						                {'x': list(etiquetasCounty), 'y': list(valoresCounty), 'type': 'bar'}
+						            ],
+						            'layout': {
+						                'title': 'County Classification'
+						            }
+						        }
+							    
+							)
+						),
+						dbc.Col(
+							dcc.Graph(
+								id='graph-chalets-year_built',
+						        figure={
+						            'data': [
+									            go.Pie(
+									                labels=list(etiquetasYearBuilt), 
+									                values=list(valoresYearBuilt)
+									            )
+									        ],
+						            'layout': {
+						                'title': 'Year Built Classification'
+						            }
+						        }
+							    
+							)
+						)
 
+								
+							
+					]),
 					# Para la interactividad entre los Dropdown y la tabla, hay que
 					# añadir un "dcc.Store", para que almacene en un paso intermedio
 					# los valores de la tabla para posteriormente mostrarlos en el Dashboard:
