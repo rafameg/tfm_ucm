@@ -41,7 +41,7 @@ tab_1_layout = html.Div([
 								##### Explicacion de las variables dentro del Rmarkdown.
 								dbc.Modal(
 						            [
-						                dbc.ModalHeader("Single Family home variable desciption"),
+						                dbc.ModalHeader("Single Family home variable description"),
 						                dbc.ModalBody(dcc.Markdown("""
 						                * __Bedrooms__: indicate the property’s number of legal bedrooms.
 
