@@ -12,7 +12,7 @@ test_base64_rafa = base64.b64encode(open(test_png_rafa, 'rb').read()).decode('as
 test_png_jorge = 'resources/team_images/image_jorge.jpeg'
 test_base64_jorge = base64.b64encode(open(test_png_jorge, 'rb').read()).decode('ascii')
 
-test_png_ruben = 'resources/team_images/image_ruben.jpeg'
+test_png_ruben = 'resources/team_images/image_ruben.png'
 test_base64_ruben = base64.b64encode(open(test_png_ruben, 'rb').read()).decode('ascii')
 
 test_png_miguel = 'resources/team_images/image_miguel.jpeg'
@@ -21,7 +21,7 @@ test_base64_miguel = base64.b64encode(open(test_png_miguel, 'rb').read()).decode
 test_png_arturo = 'resources/team_images/image_arturo.jpeg'
 test_base64_arturo = base64.b64encode(open(test_png_arturo, 'rb').read()).decode('ascii')
 
-test_png_javier = 'resources/team_images/image_javier.jpg'
+test_png_javier = 'resources/team_images/image_javier.jpeg'
 test_base64_javier = base64.b64encode(open(test_png_javier, 'rb').read()).decode('ascii')
 
 tab_1_layout = html.Div([
