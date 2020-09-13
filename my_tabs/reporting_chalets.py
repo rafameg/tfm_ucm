@@ -224,7 +224,7 @@ tab_1_layout = html.Div([
 						                {'x': list(etiquetasCounty), 'y': list(valoresCounty), 'type': 'bar'}
 						            ],
 						            'layout': {
-						                'title': 'County Classification'
+						                'title': 'Sales by County'
 						            }
 						        }
 							    
