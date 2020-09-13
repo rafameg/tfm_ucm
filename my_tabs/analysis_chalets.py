@@ -540,12 +540,12 @@ tab_1_layout = html.Div([
 							    		dbc.Col(
 							        	 	html.P(id='result-prediction-chalets')
 							        	)
-							        ]),
-							        dbc.Row([
-							        	dbc.Col(
-							        		html.Div(id='output-data-recomenacion-chalets')
-							        	)
 							        ])
+							        # ,dbc.Row([
+							        # 	dbc.Col(
+							        # 		html.Div(id='output-data-recomenacion-chalets')
+							        # 	)
+							        # ])
 							    ])
 						    ),
 						    html.Hr(),

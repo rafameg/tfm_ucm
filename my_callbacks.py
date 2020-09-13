@@ -155,8 +155,9 @@ def toggle_modal(n1, n2, is_open):
 @app.callback(
     [Output("tabla-analisis-flats", "data"), 
      Output('tabla-analisis-flats', 'columns'),
-     Output('result-prediction-flats','children'),
-     Output('output-data-recomenacion-flats','children')],
+     Output('result-prediction-flats','children')
+     #,Output('output-data-recomenacion-flats','children')
+     ],
     [Input("input-predi_button-flats", "n_clicks")],
     [
         State("input-bed-flats", "value"),
@@ -266,28 +267,28 @@ def generatePredictionsFlats(n,bed,bath,hbath,garage,one_space,living_area,tile,
 
         # Calculamos la recomendacion:
         ### El primer parámetro de la llamada es False porque True significa chalets y False significa Flats
-        recomendacion = data_load.recommender_get_recomendation(False,bed,bath,garage,zip_code,living_area,year_built,prediccion_precio[0])
-        if recomendacion.empty == False:
-            figura = html.Div([
-                            html.Hr(),
-                            dbc.Row([html.P("Se han encontrado datos de inmuebles similares a los que estás interesado en vender. ")]),
-                            dbc.Row([
-                                dbc.Col( 
-                                    dash_table.DataTable(
-                                                        data = recomendacion.to_dict('records'),
-                                                        columns=[{'name': i, 'id': i} for i in recomendacion.columns]
-                                                        )
-                                )
-                            ])
+        # recomendacion = data_load.recommender_get_recomendation(False,bed,bath,garage,zip_code,living_area,year_built,prediccion_precio[0])
+        # if recomendacion.empty == False:
+        #     figura = html.Div([
+        #                     html.Hr(),
+        #                     dbc.Row([html.P("Se han encontrado datos de inmuebles similares a los que estás interesado en vender. ")]),
+        #                     dbc.Row([
+        #                         dbc.Col( 
+        #                             dash_table.DataTable(
+        #                                                 data = recomendacion.to_dict('records'),
+        #                                                 columns=[{'name': i, 'id': i} for i in recomendacion.columns]
+        #                                                 )
+        #                         )
+        #                     ])
 
-                        ])
-        else:
-            figura = html.Div([
-                                html.Hr(),
-                                html.P("No se ha encontrado ninguna recomendación. ")
-                            ])
+        #                 ])
+        # else:
+        #     figura = html.Div([
+        #                         html.Hr(),
+        #                         html.P("No se ha encontrado ninguna recomendación. ")
+        #                     ])
 
-        return data,columns,f'The predicted price for this property is ${int(round(prediccion_precio[0]))} with an interval (inf,sup) between ${int(round(limiteInferiorIntervalo))} and ${int(round(limiteSuperiorIntervalo))}', figura
+        return data,columns,f'The predicted price for this property is ${int(round(prediccion_precio[0]))} with an interval (inf,sup) between ${int(round(limiteInferiorIntervalo))} and ${int(round(limiteSuperiorIntervalo))}'#, figura
 
 ##########################################################################################################################
 
@@ -630,8 +631,9 @@ def update_output_div(input_value):
 @app.callback(
     [Output("tabla-analisis-chalets", "data"), 
      Output('tabla-analisis-chalets', 'columns'),
-     Output('result-prediction-chalets','children'),
-     Output('output-data-recomenacion-chalets','children')],
+     Output('result-prediction-chalets','children')
+     #,Output('output-data-recomenacion-chalets','children')
+     ],
     [Input('input-predi_button-chalets', 'n_clicks')],
     [State('input-bed-chalets', 'value'), 
       State('input-bath-chalets', 'value'), 
@@ -719,26 +721,26 @@ def generatePredictionsChalets(n, bed, bath, hoa, pool, garage, built_year, wate
 
 
         ## Llamamos al código para calcular la recomendacion en base a los input del usuario
-        recomendacion = data_load.recommender_get_recomendation(True,bed,bath,garage,zip_code,living_area,built_year,prediccion_precio[0])
-        if recomendacion.empty == False:
-            figura = html.Div([
-                            html.Hr(),
-                            dbc.Row([html.P("Below you will find a list of properties sold in the past 12 months best resembling the features of the property previously analyzed. The number of comparables available varies depending on the features of your property and how common those features are found in your area. If no list is rendered, there might be no properties recently sold in your area with similar attributes. ")]),
-                            dbc.Row([
-                                dbc.Col( 
-                                    dash_table.DataTable(
-                                                        data = recomendacion.to_dict('records'),
-                                                        columns=[{'name': i, 'id': i} for i in recomendacion.columns]
-                                                        )
-                                )
-                            ])
+        # recomendacion = data_load.recommender_get_recomendation(True,bed,bath,garage,zip_code,living_area,built_year,prediccion_precio[0])
+        # if recomendacion.empty == False:
+        #     figura = html.Div([
+        #                     html.Hr(),
+        #                     dbc.Row([html.P("Below you will find a list of properties sold in the past 12 months best resembling the features of the property previously analyzed. The number of comparables available varies depending on the features of your property and how common those features are found in your area. If no list is rendered, there might be no properties recently sold in your area with similar attributes. ")]),
+        #                     dbc.Row([
+        #                         dbc.Col( 
+        #                             dash_table.DataTable(
+        #                                                 data = recomendacion.to_dict('records'),
+        #                                                 columns=[{'name': i, 'id': i} for i in recomendacion.columns]
+        #                                                 )
+        #                         )
+        #                     ])
 
-                        ])
-        else:
-            figura = html.Div([
-                                html.Hr(),
-                                html.P("No properties found")
-                            ])
+        #                 ])
+        # else:
+        #     figura = html.Div([
+        #                         html.Hr(),
+        #                         html.P("No properties found")
+        #                     ])
 
-        return data,columns,f'The predicted price for this property is ${int(round(prediccion_precio[0]))} with an interval (inf,sup) between ${int(round(limiteInferiorIntervalo))} and ${int(round(limiteSuperiorIntervalo))}', figura
+        return data,columns,f'The predicted price for this property is ${int(round(prediccion_precio[0]))} with an interval (inf,sup) between ${int(round(limiteInferiorIntervalo))} and ${int(round(limiteSuperiorIntervalo))}'#, figura
 
