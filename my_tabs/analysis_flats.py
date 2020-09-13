@@ -676,11 +676,11 @@ tab_1_layout = html.Div([
 								        	 	html.P(id='result-prediction-flats')
 								        	)
 								        ])
-								        # ,dbc.Row([
-								        # 	dbc.Col(
-								        # 		html.Div(id='output-data-recomenacion-flats')
-								        # 	)
-								        # ])
+								        ,dbc.Row([
+								        	dbc.Col(
+								        		html.Div(id='output-data-recomenacion-flats')
+								        	)
+								        ])
 								    ])
 							    ),
 						        html.Span(id="example-output", style={"vertical-align": "middle"}),
